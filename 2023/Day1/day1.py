@@ -2,7 +2,7 @@
 with open('input.txt','r') as i:
     lines = i.readlines()
 
-# Part
+# Part 1
 def digits1(line):
     # Find the first and last digits
     return int(
@@ -13,6 +13,7 @@ def digits1(line):
 # Print the sum of all digits returned from the lines
 print(sum(digits1(line) for line in lines))
 
+# Part 2
 def digits2(line):
     # A dictonary to replace written numbers with actual numbers
     # Amended many times to figure out what worked for the secret strings like "nineight".. tricky bugger
