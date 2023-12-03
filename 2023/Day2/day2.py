@@ -7,7 +7,6 @@ def gameSum():
     # Initialize the sum of game numbers
     sum = 0
 
-    # Run through each line
     for line in lines:
         # Split the line by colon to separate the game number and the rest
         game_info = line.split(':')
@@ -45,7 +44,6 @@ def gameSum():
         if game_possible:
             sum += game_number
 
-    # Return the sum
     return sum
 
 # Part 2 - very similar to Part 1 - maybe could have been combined into one function with a parameter for the power? I can do that later for funzies :D
@@ -83,7 +81,6 @@ def powerSum():
         product = max['red'] * max['green'] * max['blue']
         sum += product
 
-    # Return the sum
     return sum
 
 # Print the sum for Part 1
