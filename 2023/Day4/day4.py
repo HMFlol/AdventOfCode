@@ -14,9 +14,9 @@ def score(lines):
         nset1 = set([int(num) for num in nums[0].split()])
         nset2 = set([int(num) for num in nums[1].split()])
         # Match is the number of numbers that are in both sets (the intersection of the two sets)
-        match = nset1.intersection(nset2)
+        match = len(nset1.intersection(nset2))
         # Score is 2 to the power of the number of numbers that are in both sets (the intersection of the two sets)
-        score = 2 ** (len(match) - 1) if len(match) > 0 else 0
+        score = 2 ** (match - 1) if match > 0 else 0
         # Add the score to the total score
         total_score += score
 
