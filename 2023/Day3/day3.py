@@ -1,8 +1,8 @@
 # Read the lines
-with open('input.txt', 'r') as i:
-    lines = i.readlines()
+with open('input.txt', 'r') as r:
+    lines = r.readlines()
 
-# Join the lines into a single string
+# coin the lines into a single string
 input = ''.join(lines)
 
 # Part 1
@@ -19,30 +19,30 @@ def parts(input):
     # Initialize the list of numbers and their positions
     numbers = []
 
-    # Iterate over each cell in the grid (i = row, j = column)
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
+    # Iterate over each cell in the grid (r = row, c = column)
+    for r in range(len(grid)):
+        for c in range(len(grid[r])):
             # If the cell contains a digit and the previous cell in the same row is not a digit
-            if grid[i][j].isdigit() and (j == 0 or not grid[i][j - 1].isdigit()):
-                # Gather all adjacent digits to form the number
+            if grid[r][c].isdigit() and (c == 0 or not grid[r][c - 1].isdigit()):
+                # Gather all adcacent digits to form the number
                 number = ''
-                start_j = j
-                while j < len(grid[i]) and grid[i][j].isdigit():
-                    number += grid[i][j]
-                    j += 1
+                start_c = c
+                while c < len(grid[r]) and grid[r][c].isdigit():
+                    number += grid[r][c]
+                    c += 1
 
                 # Store the number along with its position (number, row, start column, end column)
-                numbers.append((int(number), i, start_j, j - 1))
+                numbers.append((int(number), r, start_c, c - 1))
 
     # Iterate over the list of numbers and their positions
-    for number, i, start_j, end_j in numbers:
+    for number, r, start_c, end_c in numbers:
         # Check the eight surrounding cells of the first and last digit for symbols
         found_symbol = False
         for dx, dy in directions:
             if found_symbol:
                 break
-            for dj in range(start_j, end_j + 1):
-                nx, ny = i + dx, dj + dy
+            for dc in range(start_c, end_c + 1):
+                nx, ny = r + dx, dc + dy
                 if 0 <= nx < len(grid) and 0 <= ny < len(grid[nx]) and not grid[nx][ny].isdigit() and grid[nx][ny] != '.':
                     # If a surrounding cell contains a symbol, add the number to the sum of part numbers
                     total_sum += number
@@ -58,28 +58,28 @@ def gears(input):
     # Define the directions to check using list comprehension... I need to study this more. I don't understand it yet but it's cool!
     # Functionally the same as directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]
     directions = [(dx, dy) for dx in range(-1, 2) for dy in range(-1, 2) if dx != 0 or dy != 0]
-    # Initialize the dictionary of symbol numbers (key = symbol(*) position, value = set of numbers adjacent to the symbol)
+    # Initialize the dictionary of symbol numbers (key = symbol(*) position, value = set of numbers adcacent to the symbol)
     symbol_numbers = {}
 
-    # Find the numbers adjacent to each '*' symbol
-    for i in range(len(grid)):
-        j = 0
-        while j < len(grid[i]):
+    # Find the numbers adcacent to each '*' symbol
+    for r in range(len(grid)):
+        c = 0
+        while c < len(grid[r]):
             # Finds a digit
-            if grid[i][j].isdigit():
+            if grid[r][c].isdigit():
                 # Mark the start of the number
-                start_j = j
+                start_c = c
                 # Find the end of the number
-                while j < len(grid[i]) and grid[i][j].isdigit():
-                    j += 1
-                # Convert the number to an integer and add it to the set of numbers adjacent to the symbol
-                number = int(''.join(grid[i][start_j:j]))
+                while c < len(grid[r]) and grid[r][c].isdigit():
+                    c += 1
+                # Convert the number to an integer and add it to the set of numbers adcacent to the symbol
+                number = int(''.join(grid[r][start_c:c]))
                 # Check the eight surrounding cells of the first and last digit for symbols
                 for dx, dy in directions:
-                    for dj in range(start_j, j):
-                        nx, ny = i + dx, dj + dy
+                    for dc in range(start_c, c):
+                        nx, ny = r + dx, dc + dy
                         if 0 <= nx < len(grid) and 0 <= ny < len(grid[nx]) and grid[nx][ny] == '*':
-                            # If a surrounding cell contains a symbol, add the number to the set of numbers adjacent to the symbol
+                            # If a surrounding cell contains a symbol, add the number to the set of numbers adcacent to the symbol
                             symbol_numbers.setdefault((nx, ny), set()).add(number)
                             break
                     else:
@@ -87,12 +87,12 @@ def gears(input):
                     break
             else:
                 # If the cell is not a digit, move to the next cell
-                j += 1
+                c += 1
 
-    # Multiply the numbers adjacent to each '*' symbol and add them to the sum
+    # Multiply the numbers adcacent to each '*' symbol and add them to the sum
     total_sum = 0
     for numbers in symbol_numbers.values():
-        # If there are exactly two numbers adjacent to the symbol, multiply them and add the product to the sum
+        # If there are exactly two numbers adcacent to the symbol, multiply them and add the product to the sum
         if len(numbers) == 2:
             numbers = list(numbers)
             total_sum += numbers[0] * numbers[1]
