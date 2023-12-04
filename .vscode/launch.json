@@ -11,8 +11,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "cwd": "${fileDirname}",
-            "args": ["-td"]
+            "cwd": "${fileDirname}"
         }
         // {
         //     "name": "Launch Package",
