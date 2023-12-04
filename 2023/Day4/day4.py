@@ -45,21 +45,17 @@ def cards(lines):
     total_cards = len(cards_dict)
     # Loop through each card number in ascending order
     for card_num in sorted(cards_dict.keys()):
-        # Get the card lines for the card number
-        card_lines = cards_dict[card_num]
-        # Loop through each card line
-        for line in card_lines:
-            # Get the match for the card line
-            match = get_match(line)
-            # Add the number of cards that can be made from the card line to the total number of cards
-            # for i in range(1, match + 1): means that the number of cards that can be made from the card line is the number of numbers that are in both sets (the intersection of the two sets) plus one
-            for i in range(1, match + 1):
-                # If the card number + i is not in the dictionary, add it to the dictionary and set its count to 0
-                if card_num + i in cards_dict:
-                    # If the card number + i is in the dictionary, add the number of cards that can be made from the card line to the total number of cards for the card number + i
-                    card_counts[card_num + i] += card_counts[card_num]
-                    # Add the number of cards that can be made from the card line to the total number of cards
-                    total_cards += card_counts[card_num]
+        # Get the match for the card line
+        match = get_match(cards_dict[card_num][0])
+        # Add the number of cards that can be made from the card line to the total number of cards
+        # for i in range(1, match + 1): means that the number of cards that can be made from the card line is the number of numbers that are in both sets (the intersection of the two sets) plus one
+        for i in range(1, match + 1):
+            # If the card number + i is not in the dictionary, add it to the dictionary and set its count to 0
+            if card_num + i in cards_dict:
+                # If the card number + i is in the dictionary, add the number of cards that can be made from the card line to the total number of cards for the card number + i
+                card_counts[card_num + i] += card_counts[card_num]
+                # Add the number of cards that can be made from the card line to the total number of cards
+                total_cards += card_counts[card_num]
 
     return total_cards
 
