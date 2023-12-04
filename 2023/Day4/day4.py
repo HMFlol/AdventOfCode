@@ -2,6 +2,16 @@
 with open('input.txt', 'r') as r:
     lines = r.readlines()
 
+# Matching all on its own
+def get_match(line):
+    # Get the two sets of numbers from the card line and convert them to sets of integers (nset1 and nset2)
+    nums = line.split(':')[1].split('|')
+    nset1 = set([int(num) for num in nums[0].split()])
+    nset2 = set([int(num) for num in nums[1].split()])
+    # Match is the number of numbers that are in both sets (the intersection of the two sets)
+    match = len(nset1.intersection(nset2))
+    return match
+
 # Part 1
 def score(lines):
     # Initialize the total score
@@ -9,12 +19,8 @@ def score(lines):
 
     # Iterate over each card line
     for line in lines:
-        # Get the two sets of numbers from the card line and convert them to sets of integers (nset1 and nset2)
-        nums = line.split(':')[1].split('|')
-        nset1 = set([int(num) for num in nums[0].split()])
-        nset2 = set([int(num) for num in nums[1].split()])
-        # Match is the number of numbers that are in both sets (the intersection of the two sets)
-        match = len(nset1.intersection(nset2))
+        # Get the match for the card line
+        match = get_match(line)
         # Score is 2 to the power of the number of numbers that are in both sets (the intersection of the two sets)
         score = 2 ** (match - 1) if match > 0 else 0
         # Add the score to the total score
@@ -43,12 +49,8 @@ def cards(lines):
         card_lines = cards_dict[card_num]
         # Loop through each card line
         for line in card_lines:
-            # Get the two sets of numbers from the card line and convert them to sets of integers (nset1 and nset2) 
-            nums = line.split(':')[1].split('|')
-            nset1 = set([int(num) for num in nums[0].split()])
-            nset2 = set([int(num) for num in nums[1].split()])
-            # Match is the number of numbers that are in both sets (the intersection of the two sets)
-            match = len(nset1.intersection(nset2))
+            # Get the match for the card line
+            match = get_match(line)
             # Add the number of cards that can be made from the card line to the total number of cards
             # for i in range(1, match + 1): means that the number of cards that can be made from the card line is the number of numbers that are in both sets (the intersection of the two sets) plus one
             for i in range(1, match + 1):
