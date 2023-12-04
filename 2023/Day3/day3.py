@@ -99,7 +99,5 @@ def gears(input):
 
     return total_sum
 
-# Print the total sum for part 1
 print(f"Part 1: {parts(input)}")
-#Print the total sum for part 2
 print(f"Part 2: {gears(input)}")
