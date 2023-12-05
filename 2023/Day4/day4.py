@@ -9,22 +9,20 @@ def get_match(line):
     nset1 = set([int(num) for num in nums[0].split()])
     nset2 = set([int(num) for num in nums[1].split()])
     # Match is the number of numbers that are in both sets (the intersection of the two sets)
-    match = len(nset1.intersection(nset2))
+    match = len(nset1 & nset2)
     return match
 
 # Part 1
 def score(lines):
     # Initialize the total score
     total_score = 0
-
     # Iterate over each card line
     for line in lines:
         # Get the match for the card line
         match = get_match(line)
-        # Score is 2 to the power of the number of numbers that are in both sets (the intersection of the two sets)
-        score = 2 ** (match - 1) if match > 0 else 0
-        # Add the score to the total score
-        total_score += score
+        if match > 0:
+            # Score is 2 to the power of the number of numbers that are in both sets (the intersection of the two sets)
+            total_score += 2 ** (match - 1)
 
     return total_score 
 
