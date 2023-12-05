@@ -4,19 +4,6 @@ with open('test.txt', 'r') as r:
 
 # Part 1 (works)
 def process_categories_and_seeds(lines):
-    # Go through each line in the file
-    for line in lines:
-        line = line.strip()  # Remove leading and trailing whitespace
-        if ":" in line:
-            # If a line contains ':', it's defining a new category
-            current_category, numbers = line.split(":")  # Split the line into category name and numbers
-            numbers = numbers.strip()  # Remove leading and trailing whitespace from the numbers
-            # If there are no numbers, store an empty list for this category; otherwise, store the numbers as a list of integers
-            categories[current_category] = [] if not numbers else [list(map(int, numbers.split()))]
-        elif line:
-            # If the line is not empty and doesn't contain ':', it's adding more numbers to the current category
-            categories[current_category].append(list(map(int, line.split())))
-            
     # This function takes a number and a category, and converts the number based on the category
     def convert_number(num, category):
         # For each category, check if the number falls within the category's range
@@ -30,6 +17,19 @@ def process_categories_and_seeds(lines):
     # Create a dictionary to store the categories and their respective values
     categories = {}
     current_category = None
+
+    # Go through each line in the file
+    for line in lines:
+        line = line.strip()  # Remove leading and trailing whitespace
+        if ":" in line:
+            # If a line contains ':', it's defining a new category
+            current_category, numbers = line.split(":")  # Split the line into category name and numbers
+            numbers = numbers.strip()  # Remove leading and trailing whitespace from the numbers
+            # If there are no numbers, store an empty list for this category; otherwise, store the numbers as a list of integers
+            categories[current_category] = [] if not numbers else [list(map(int, numbers.split()))]
+        elif line:
+            # If the line is not empty and doesn't contain ':', it's adding more numbers to the current category
+            categories[current_category].append(list(map(int, line.split())))
 
     # Get the seed values and the names of the categories
     seeds = categories.pop('seeds')[0]
