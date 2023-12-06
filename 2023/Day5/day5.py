@@ -1,5 +1,7 @@
+import sys
+
 # Open the file 'test.txt' in read mode ('r') and read all lines into a list
-with open('test.txt', 'r') as r:
+with open('input.txt', 'r') as r:
     lines = r.readlines()
 
 # Part 1 (works)
@@ -51,79 +53,64 @@ def process_categories_and_seeds(lines):
 
 # Part 2 (doesn't work - works for test but not actual input)
 def process_seed_ranges(lines):
-    # This function takes a start, length, and category, and splits and converts a range based on the category
-    def split_and_convert_range(start, length, category):
-        # Unpack the category into start, start, and length
-        dest_start, src_start, src_length = category
-        # Calculate the end of the category's range
-        src_end = src_start + src_length - 1
-        # Calculate the end of the input range
-        end = start + length - 1
-
-        # If the input range doesn't overlap with the category's range, return the input range as is
-        if end < src_start or start > src_end:
-            return [(start, length)]
-        else:
-            # If the input range does overlap with the category's range, we need to split it
-            ranges = []
-
-            # If there's a part of the input range before the category's range, add it to the output
-            if start < src_start:
-                ranges.append((start, src_start - start))
-
-            # Convert the part of the input range that overlaps with the category's range
-            converted_start = max(start, src_start)
-            converted_end = min(end, src_end)
-            converted_length = converted_end - converted_start + 1
-            ranges.append((dest_start + (converted_start - src_start), converted_length))
-
-            # If there's a part of the input range after the category's range, add it to the output
-            if end > src_end:
-                ranges.append((converted_end + 1, end - src_end))
-
-            return ranges
-
     # Create a dictionary to store the categories and their respective values
     categories = {}
+    # Initialize the current category to None
     current_category = None
 
-    # Go through each line in the file
+    # Iterate over each line in the input like in pt 1
     for line in lines:
         line = line.strip()  # Remove leading and trailing whitespace
-        if ":" in line:
-            # If a line contains ':', it's defining a new category
+        if ":" in line:  # If the line contains ":", it's defining a new category
             current_category, numbers = line.split(":")  # Split the line into category name and numbers
             numbers = numbers.strip()  # Remove leading and trailing whitespace from the numbers
             # If there are no numbers, store an empty list for this category; otherwise, store the numbers as a list of integers
             categories[current_category] = [] if not numbers else [list(map(int, numbers.split()))]
-        elif line:
-            # If the line is not empty and doesn't contain ':', it's adding more numbers to the current category
+        elif line:  # If the line is not empty, it's adding more numbers to the current category
             categories[current_category].append(list(map(int, line.split())))
 
-    # Get the seed ranges
-    seed_ranges = categories.pop('seeds')[0]
+    # Extract the seed ranges and the maps from the categories
+    seeds = categories.pop('seeds')[0]
+    inputs = list(categories.values())
 
-    # Merge all the categories into one list and sort it by the end value
-    merged_categories = []
-    for category in categories.values():
-        merged_categories.extend(category)
-    merged_categories.sort(key=lambda x: x[1])
+    # Initialize the list of seed ranges
+    seed_ranges = []
+    # Iterate over pairs of numbers in the seeds list
+    for i in range(0, len(seeds), 2):
+        # Each pair of numbers represents a range, so add it to the list of seed ranges
+        seed_ranges.append((seeds[i], seeds[i] + seeds[i + 1]))
 
-    # Create a list of ranges from the seed ranges
-    ranges = [(seed_ranges[i], seed_ranges[i+1]) for i in range(0, len(seed_ranges), 2)]
-
-    # Go through each category
-    for category in merged_categories:
+    # Iterate over each map
+    for m in inputs:
+        # Initialize the list of new ranges
         new_ranges = []
-        for start, length in ranges:
-            # Split and convert each range based on the current category
-            new_ranges.extend(split_and_convert_range(start, length, category))
-        ranges = new_ranges
+        # While there are still seed ranges to process
+        while len(seed_ranges) > 0:
+            # Pop a seed range from the list
+            s, e = seed_ranges.pop()
+            # Iterate over each range in the map
+            for map_start, map_end, length in m:
+                # Calculate the overlap of the seed range with the map range
+                os = max(s, map_end)
+                oe = min(e, map_end + length)
+                # If the seed range overlaps with the map range
+                if os < oe:
+                    # Add the corresponding range in the destination space to the list of new ranges
+                    new_ranges.append((os - map_end + map_start, oe - map_end + map_start))
+                    # If there is a part of the seed range before the overlap, add it back to the list of seed ranges for further processing
+                    if os > s:
+                        seed_ranges.append((s, os))
+                    # If there is a part of the seed range after the overlap, add it back to the list of seed ranges for further processing
+                    if e > oe:
+                        seed_ranges.append((oe, e))
+                    break  # We've processed this seed range, so we can move on to the next one
+            else:
+                # If the seed range doesn't overlap with any map range, add it to the list of new ranges as is
+                new_ranges.append((s, e))
+        # Replace the list of seed ranges with the list of new ranges for the next iteration
+        seed_ranges = new_ranges
 
-    # Find the smallest start value from the final ranges
-    min_location = min(ranges, key=lambda x: x[0])[0]
-
-    return min_location
+    return min(seed_ranges)[0]
 
 # Call the functions
 print(f"Part 1: {process_categories_and_seeds(lines)}")
