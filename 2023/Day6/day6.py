@@ -5,6 +5,9 @@ time, dist = open('input.txt').read().split("\n")
 time = [int(t) for t in time.split()[1:]]
 dist = [int(d) for d in dist.split()[1:]]
 
+# Cool trick!
+#print(sum([b*(100-b) > 100 for b in range(100)]))
+
 # Part 1
 def part1(time, dist):
     # Initialize a list to store the number of ways to get to each destination
@@ -18,7 +21,7 @@ def part1(time, dist):
         ways = sum([b*(time-b) > dist for b in range(time)])
         numways.append(ways)
 
-    result = 1
+    result = 1 # Cuz you can't start multiplying with 0 and you gotta start somewhere ya know what I mean dog? (づ￣ 3￣)づ
     for ways in numways:
         result *= ways
 
@@ -36,3 +39,5 @@ def part2(time, dist):
 # Call the functions
 print(f"Part 1: {part1(time, dist)}")
 print(f"Part 2: {part2(time, dist)}")
+
+
