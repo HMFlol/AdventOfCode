@@ -13,7 +13,7 @@ def part1(time, dist):
     for time, dist in zip(time, dist):
         # button * (time = button) > dist for whatever the range of time is
         # So, if time = 1 and dist = 1, then 1 * (1 - 1) > 1 is False
-        # If time = 2 and dist = 1, then 1 * (2 - 1) > 1 is True, but 2 * (2 - 1) > 1 is False
+        # If time = 2 and dist = 1, then 1 * (2 - 1) > 1 is False, but 2 * (2 - 1) > 1 is True
         # This will give the number of ways to win, which is appended to the list
         ways = sum([b*(time-b) > dist for b in range(time)])
         numways.append(ways)
