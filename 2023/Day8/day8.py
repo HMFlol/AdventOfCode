@@ -5,20 +5,28 @@ import time
 start_time = time.time()
 
 # Open the file and break the two lines into time and dist
-with open('input.txt','r') as i:
-    lines = i.read().splitlines()
+#with open('input.txt','r') as i:
+#    lines = i.read().splitlines()
+# THIS IS WAY BETTER - SKIP LINES WITH _
+steps, _, *nodes = open('input.txt').read().splitlines()
 
 # Extract steps and nodes
-steps = lines[0]
-nodes = lines[2:]
+#steps = lines[0]
+#nodes = lines[2:]
 
 # Process nodes and stick in a dictionary
 nodesdict = {}
+# Also much better - use split to break the node into pos and targets and then split the targets into a list
 for node in nodes:
-        nodeparts = node.split('=')
-        nodename = nodeparts[0].strip()
-        nodelr = nodeparts[1].strip().strip('()').split(', ')
-        nodesdict[nodename] = nodelr
+    pos, targets = node.split(" = ")
+    nodesdict[pos] = targets[1:-1].split(", ")
+
+# This is what I had done... 
+# for node in nodes:
+#        nodeparts = node.split('=')
+#        nodename = nodeparts[0].strip()
+#        nodelr = nodeparts[1].strip().strip('()').split(', ')
+#        nodesdict[nodename] = nodelr
 
 def notspooky(steps, nodesdict):
 
