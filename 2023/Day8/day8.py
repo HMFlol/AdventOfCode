@@ -29,65 +29,67 @@ for node in nodes:
 #        nodesdict[nodename] = nodelr
 
 def notspooky(steps, nodesdict):
-
-    cnode = 'AAA'
-
+    startnotspooky = time.time()
+    # Initialize current node, step count
+    curnode = 'AAA'
     stepcount = 0
-    stepindex = 0
 
-    while cnode != 'ZZZ':
-        step = steps[stepindex]
-        cnode = nodesdict[cnode][0] if step == 'L' else nodesdict[cnode][1]
+    while curnode != 'ZZZ':
+        # current step is the step at the current index. Will wrap when it gets to the end of the steps list - stepcoount will equal len(steps)
+        step = steps[stepcount % len(steps)]
+        curnode = nodesdict[curnode][0] if step == 'L' else nodesdict[curnode][1]
         stepcount +=1
-        # this updates the stepindex to the next step, wrapping around to the start of the steps list if needed with the % operator (gives the remainder)
-        stepindex = (stepindex + 1) % len(steps)
 
-    return stepcount
+    endnotspooky = time.time()
+    print(f"Part 1 - No Spook: {stepcount}, Time: {endnotspooky - startnotspooky:.6f} seconds")
 
 def spooky(steps, nodesdict):
-    # Initialize current nodes to all nodes that end with 'A'
-    cnodes = [node for node in nodesdict if node.endswith('A')]
-
+    startspooky = time.time()
+    # Initialize current nodes to all nodes that end with 'A' this time
+    curnodes = [node for node in nodesdict if node.endswith('A')]
     stepcount = 0
-    stepindex = 0
 
     # Continue until all current nodes end with 'Z'
-    while any(not node.endswith('Z') for node in cnodes):
+    while any(not node.endswith('Z') for node in curnodes):
         # Update current nodes based on steps
-        for i in range(len(cnodes)):
-            step = steps[stepindex]
-            cnodes[i] = nodesdict[cnodes[i]][0] if step == 'L' else nodesdict[cnodes[i]][1]
+        for i in range(len(curnodes)):
+            step = steps[stepcount % len(steps)]
+            curnodes[i] = nodesdict[curnodes[i]][0] if step == 'L' else nodesdict[curnodes[i]][1]
         stepcount += 1
-        stepindex = (stepindex + 1) % len(steps)
 
-    return stepcount
+    endspooky = time.time()
+    print(f"Part 2 - No LCM. The scary part is how long this takes: {stepcount}, Time: {endspooky - startspooky:.6f} seconds")
 
 def spookylcm(steps, nodesdict):
-    # Compute cycle lengths for all 'A' nodes
-    cycle_lengths = []
+    startspookylcm = time.time()
+    # Compute stepcoutns for all 'A' nodes
+    stepcounts = []
     for node in nodesdict:
+        # Initialize current nodes to all nodes that end with 'A' this time
         if node.endswith('A'):
-            cnode = node
-            cycle_length = 0
-            while not cnode.endswith('Z'):
-                step = steps[cycle_length % len(steps)]
-                cnode = nodesdict[cnode][0] if step == 'L' else nodesdict[cnode][1]
-                cycle_length += 1
-            cycle_lengths.append(cycle_length)
+            curnode = node
+            stepcount = 0
+            while not curnode.endswith('Z'):
+                step = steps[stepcount % len(steps)]
+                curnode = nodesdict[curnode][0] if step == 'L' else nodesdict[curnode][1]
+                stepcount += 1
+            stepcounts.append(stepcount)
     # Compute the least common multiple of the cycle lengths using the reduce function from functools and the gcd function from math
     # The math is explained here: https://www.geeksforgeeks.org/program-to-find-lcm-of-two-numbers/
     # https://www.w3resource.com/python-exercises/basic/python-basic-1-exercise-135.php
-    def lcm(cycle_lengths):
-        return reduce((lambda x, y: int(x * y / gcd(x, y))), cycle_lengths)
+    def lcm(stepcounts):
+        return reduce((lambda x, y: int(x * y / gcd(x, y))), stepcounts)
 
-    return(lcm(cycle_lengths))
+    endspookylcm = time.time()
+    print(f"Part 2 - LCM Jumpscare Edition - Boo Bitch!: {lcm(stepcounts)}, Time: {endspookylcm - startspookylcm:.6f} seconds")
 
 # Call the functions
-print(f"No Spook: {notspooky(steps, nodesdict)}")
-print(f"Boo Bitch!: {spookylcm(steps, nodesdict)}")
+notspooky(steps, nodesdict)
+spookylcm(steps, nodesdict)
+spooky(steps, nodesdict)
 
 
 end_time = time.time()
 elapsed_time = end_time - start_time
 
-print(f"Execution Time: {elapsed_time} seconds")
+print(f"Total execution time: {elapsed_time:.6f} seconds")
