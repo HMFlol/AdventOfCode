@@ -55,7 +55,7 @@ def spooky(steps, nodesdict):
         for i in range(len(curnodes)):
             step = steps[stepcount % len(steps)]
             curnodes[i] = nodesdict[curnodes[i]][0] if step == 'L' else nodesdict[curnodes[i]][1]
-        stepcount += 1
+        stepcount += 1\
 
     endspooky = time.time()
     print(f"Part 2 - No LCM. The scary part is how long this takes: {stepcount}, Time: {endspooky - startspooky:.6f} seconds")
@@ -86,7 +86,7 @@ def spookylcm(steps, nodesdict):
 # Call the functions
 notspooky(steps, nodesdict)
 spookylcm(steps, nodesdict)
-spooky(steps, nodesdict)
+#spooky(steps, nodesdict)
 
 
 end_time = time.time()
