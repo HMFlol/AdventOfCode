@@ -21,6 +21,6 @@ total = 0
     total += extrapolate(nums)"""
 
 # Line comprehension version!!
-total = sum(extrapolate(list(map(int, line.split()))) for line in open('test.txt').read().splitlines())
+total = sum(extrapolate(list(map(int, line.split()))) for line in data.splitlines())
 
 print(total)
