@@ -3,7 +3,7 @@ import time
 start_time = time.time()
 
 # Open the file and break the two lines into time and dist
-sequences = [list(map(int, line.split())) for line in open('test.txt').read().splitlines()]
+sequences = [list(map(int, line.split())) for line in open('input.txt').read().splitlines()]
 
 # Part 1
 def seq(sequences):
