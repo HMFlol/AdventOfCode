@@ -9,6 +9,7 @@ input = ''.join(lines)
 def parts(input):
     # Parse the input into a 2D array
     grid = [list(line) for line in input.split('\n')]
+    print(grid)
 
     # Define the directions to check
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]

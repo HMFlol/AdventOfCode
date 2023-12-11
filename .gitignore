@@ -6,3 +6,6 @@ input*.txt
 test*.txt
 *hn*.py
 2023/Day10/day10wtf.py
+2023/Day10/day10vis.py
+2023/Day10/day10vis2.py
+2023/Day3/day3.py
