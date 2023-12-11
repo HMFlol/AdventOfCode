@@ -4,7 +4,6 @@ The rest is essentially the same
 """
 from aocd import data
 from itertools import combinations
-import math
 
 grid = [list(line) for line in data.split('\n')]
 
@@ -40,10 +39,18 @@ def calculate_sum_of_distances(expansion):
         X1, Y1 = pair[0]
         X2, Y2 = pair[1]
         
-        return math.fabs(X2 - X1) + math.fabs(Y2 - Y1)
+        return abs(X2 - X1) + abs(Y2 - Y1)
 
     upairs = combinations(hashes, 2)
 
+    """
+    Could also do this but the other way is a slick tool!
+    
+    upairs = []
+    for i in range(len(hashes) - 1):
+        for j in range(i + 1, len(hashes)):
+            upairs.append((hashes[i], hashes[j]))
+    """
     dists = list(map(manhattanDist, upairs))
 
     return sum(dists)
