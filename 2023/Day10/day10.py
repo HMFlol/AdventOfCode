@@ -9,7 +9,7 @@ start_time = time.time()
 # Parse test data
 # grid = [list(line) for line in open('test.txt').read().split('\n')]
 # Parse the input into a 2D grid
-grid = [list(line) for line in data.split('\n')]
+grid = data.strip().splitlines()
 
 # Map each pipe symbol to the directions it allows movement in with DICTIONARIES!!!!!
 pipes = {'|': [(1, 0), (-1, 0)], '-': [(0, 1), (0, -1)], 'L': [(0, 1), (-1, 0)], 'J': [(0, -1), (-1, 0)], '7': [(0, -1), (1, 0)], 'F': [(0, 1), (1, 0)], 'S': [(1, 0), (-1, 0), (0, 1), (0, -1)]}
@@ -21,15 +21,12 @@ start = [(r, c) for r in range(len(grid)) for c in range(len(grid[r])) if grid[r
 def loop(grid, start):
     # Initialize a set to keep track of visited positions
     visited = set()
-
     # Initialize a dictionary to store the maximum number of steps to each position
     distances = {start: 0}
-
     # Initialize a queue for BFS and add the starting position to it
     # deque is a list-like container with fast appends and pops on either end
     # Google told me to do this
     queue = deque([(start, 0)])
-
     # Using a Breadth First Search algorithm(this is a recursive algorithm that uses a queue to keep track of the nodes to visit)
     # It searches outwards in a circle from the starting point until it finds all the nodes in the loop
     while queue:
@@ -48,7 +45,6 @@ def loop(grid, start):
     print(max(distances.values()))
 
 loop(grid, start)
-
 
 """
 TIME STUFF
