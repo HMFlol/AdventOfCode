@@ -74,5 +74,3 @@ print(f"Finished in {end - start:.6f} seconds")
 
 endtime = time()
 print(f"Total execution time: {endtime - starttime:.6f} seconds")
-
-
