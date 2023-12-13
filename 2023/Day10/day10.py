@@ -1,11 +1,8 @@
-from aocd import data
-from collections import deque
-"""
-TIME STUFF
-"""
+from aocd import get_data
 import time
-start_time = time.time()
+from collections import deque
 
+data = get_data(day=10, year=2023)
 # Parse test data
 # grid = [list(line) for line in open('test.txt').read().split('\n')]
 # Parse the input into a 2D grid
@@ -15,7 +12,7 @@ grid = data.strip().splitlines()
 pipes = {'|': [(1, 0), (-1, 0)], '-': [(0, 1), (0, -1)], 'L': [(0, 1), (-1, 0)], 'J': [(0, -1), (-1, 0)], '7': [(0, -1), (1, 0)], 'F': [(0, 1), (1, 0)], 'S': [(1, 0), (-1, 0), (0, 1), (0, -1)]}
 
 # Find the starting position 'S' in the grid
-start = [(r, c) for r in range(len(grid)) for c in range(len(grid[r])) if grid[r][c] == 'S'][0]
+start = next((r, c) for r, row in enumerate(grid) for c, ch in enumerate(row) if ch == 'S')
 
 # Part 1
 def loop(grid, start):
@@ -44,11 +41,9 @@ def loop(grid, start):
     # Find the maximum distance from the starting point to any other node in the loop
     print(max(distances.values()))
 
+start_time = time.time()
+
 loop(grid, start)
 
-"""
-TIME STUFF
-"""
 end_time = time.time()
-elapsed_time = end_time - start_time
-print(f"Total execution time: {elapsed_time:.6f} seconds")
+print(f"Total execution time: {end_time - start_time:.6f} seconds")
