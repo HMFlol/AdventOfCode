@@ -9,10 +9,12 @@ data = get_data(day=10, year=2023)
 
 grid = data.splitlines()
 
-U = (-1, 0)
+'''U = (-1, 0)
 D = (1, 0)
 L = (0, -1)
-R = (0, 1)
+R = (0, 1)'''
+# Cooler way to do this imo
+U, R, D, L = -1j, 1, 1j, -1
 
 pipes = {'|': (U, D), '-': (L, R), 'L': (U, R), 'J': (U, L), '7': (D, L), 'F': (D, R), '.': ()}
 
@@ -121,12 +123,12 @@ grid = [row.replace('S', S) for row in grid]
 # Find the loop we need for everything
 loop = findLoop(grid, sr, sc, pipes)
 
-print(f"Total (Part1):", len(loop) // 2)
+print(f"Total (Part1 - Loop Traversal):", len(loop) // 2)
 # Part 2
 # Replace the old grid with the new grid
 grid = nGrid(grid)
 
-print(f"Total (Part2): {rayTracing(grid)}")
+print(f"Total (Part2 - Horizontal Ray Tracing): {rayTracing(grid)}")
 
 endtime = time.time()
 print(f"Total execution time: {endtime - starttime:.6f} seconds")
