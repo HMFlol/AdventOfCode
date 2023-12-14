@@ -8,13 +8,10 @@ data = get_data(day=10, year=2023)
 # data = open('test.txt').read()
 
 grid = data.splitlines()
-
-'''U = (-1, 0)
-D = (1, 0)
-L = (0, -1)
-R = (0, 1)'''
-# Cooler way to do this imo
-U, R, D, L = -1j, 1, 1j, -1
+# The UDLR technique. Is this a named thing or did I just make it up?
+U, D, L, R = (-1, 0), (1, 0), (0, -1), (0, 1)
+# Cooler way to do this imo, but then I have to account for using complex numbers later
+# U, R, D, L = -1j, 1, 1j, -1
 
 pipes = {'|': (U, D), '-': (L, R), 'L': (U, R), 'J': (U, L), '7': (D, L), 'F': (D, R), '.': ()}
 
