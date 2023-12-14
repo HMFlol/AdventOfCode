@@ -20,15 +20,11 @@ for r, row in enumerate(grid):
                 grid[cr+dr][c] = 'O'
                 cr -= 1
                 
-
 distance = 0
-dlist = []
 for r , row in enumerate(grid):
     for c, ch in enumerate(row):
         if ch == 'O':
             distance += len(grid) - r
-            dlist.append(len(grid) - r)
-
 
 print(f"Total (Part1):", distance)
 
