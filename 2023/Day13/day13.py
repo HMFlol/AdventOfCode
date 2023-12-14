@@ -49,15 +49,15 @@ def morereflections(grids):
             up = grid[:row][::-1]
             down = grid[row:]
             
-            diff = 0
+            badboy = 0
             # zip up and down to check two corresponding rows at a time
             for x, y in zip(up, down):
                 # zip x and y to check two i-th characters at a time
                 for a, b in zip(x, y):
                     if a != b:
-                        diff += 1
-            # If there is only one diff between two rows then it's the one we're looking for
-            if diff == 1:
+                        badboy += 1
+            # If there is only one badboy between two rows then it's the one we're looking for
+            if badboy == 1:
                 total += row * 100
 
         grid = list(zip(*grid))
@@ -65,13 +65,13 @@ def morereflections(grids):
             up = grid[:col][::-1]
             down = grid[col:]
             
-            diff = 0
+            badboy = 0
             for x, y in zip(up, down):
                 for a, b in zip(x, y):
                     if a != b:
-                        diff += 1
+                        badboy += 1
 
-            if diff == 1:
+            if badboy == 1:
                 total += col
 
     return total
