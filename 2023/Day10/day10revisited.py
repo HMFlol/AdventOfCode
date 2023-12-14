@@ -133,7 +133,7 @@ print(f"Total execution time: {endtime - starttime:.6f} seconds")
 
 '''
 Create a mapping from your characters to pipe characters for funzies
-Works just fine instead of the above
+Works fine in nGrid instead, but need to replace the relevant characters in the rayTracing function
 '''
 '''
 pipe_chars = {'J': '┘', 'L': '└', '7': '┐', 'F': '┌'}
