@@ -1,34 +1,27 @@
 '''
-All essentially the same as p1
-Moved the stuff into functions for moveing up and distance calc
-Added func for 
+Using some of HNs method of sorting the grid, rather than my sorting method in P1.
+Also moved things into functions.
 '''
-
 from aocd import get_data
 from time import time
 start_time = time()
 data = get_data(day=14, year=2023)
 #data = open('test.txt').read()
-grid = data.splitlines()
+grid = tuple(data.splitlines())
+#list(x) for x in zip(*grid[::-1])]
+    
+def moveUp():
+    global grid
+    #print('\n'.join(grid) + '\n')
+    grid = tuple(map("".join, zip(*grid[::-1])))
+    #print('\n'.join(grid) + '\n')
+    grid = tuple("#".join(["".join(sorted(tuple(group))) for group in row.split("#")]) for row in grid)
+    #print('\n'.join(grid) + '\n')
+    '''grid = tuple(row[::-1] for row in grid)
+    print('\n'.join(grid) + '\n')'''
+    
 
-grid = [list(r) for r in grid]
-
-def spin(grid):
-    return [list(x) for x in zip(*grid[::-1])]
-
-def moveUp(grid):
-    dr, dc = -1, 0
-    for r, row in enumerate(grid):
-        for c, ch in enumerate(row):
-            if ch == 'O':
-                cr = r
-                while cr > 0 and grid[cr + dr][c] == '.':
-                    grid[cr][c] = '.'
-                    grid[cr+dr][c] = 'O'
-                    cr -= 1
-    return grid
-
-def distances(grid):
+def distances():
     distances = 0
     for r , row in enumerate(grid):
         for c, ch in enumerate(row):
@@ -48,18 +41,17 @@ cycle = 0
 while cycle < cycles:
     cycle += 1
     for _ in range(4):
-        grid = moveUp(grid)
-        grid = spin(grid)
+        moveUp()
     neo = tuple(tuple(row) for row in grid) # Convert to tuple of tuples so we can hash it
     if neo in grids: # If we've seen it before
-        print(f"Found dupe at cycle {cycle}") # For fun and visibility as to what's the haps
+        print(f"dupe ", cycle)
         cycle_length = cycle - grids[neo] # Calculate the cycle length (current cycle - cycle count when this was last seen)
         amt = (cycles - cycle) // cycle_length # Calculate how many cycles we can skip
         cycle += amt * cycle_length # Change cycle count by adding the amount we can skip
     grids[neo] = cycle # Add the grid to the dict with the cycle count as the value
 
 # Then we calculate distance as in p1
-distance = distances(grid)
+distance = distances()
 
 print(f"Total (Part2):", distance)
 end_time = time()

@@ -45,13 +45,13 @@ def fpower(strings):
                 box.append((label, focal)) # If it doesn't exist, just append it
             boxes[lens] = box # Put the box back in the boxes list at the lens index
 
-    fpower = sum((b + 1) * (l + 1) * int(focal) for b, box in enumerate(boxes) for l, (_, focal) in enumerate(box))
+    fpower = sum((box_idx + 1) * (l_slot + 1) * int(focal) for box_idx, box in enumerate(boxes) for l_slot, (_, focal) in enumerate(box))
     '''
     Wrote it like this first time, but I'm practicing my list comprehension skills!
     fpower = 0
-    for b, box in enumerate(boxes):
-        for l, (_, focal) in enumerate(box):
-            fpower += (b + 1) * (l + 1) * int(focal)
+    for box_idx, box in enumerate(boxes):
+        for l_slot, (_, focal) in enumerate(box):
+            fpower += (box_idx + 1) * (l_slot + 1) * int(focal)
     '''
     return fpower
 

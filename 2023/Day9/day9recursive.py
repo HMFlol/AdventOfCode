@@ -1,5 +1,7 @@
 # Learning about recursion and how to use and parse aocd data
-from aocd import data
+from aocd import get_data
+
+data = get_data(day=9, year=2023)
 
 def extrapolate(array):
     # all checks if all elements in an iterable are true. In this case, it checks if all numbers in the array are 0 and returns 0 if they are
