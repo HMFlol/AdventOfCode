@@ -1,6 +1,6 @@
 from aocd import get_data
 from time import time
-start_time = time()
+
 data = get_data(day=15, year=2023)
 #data = open('test.txt').read()
 strings = data.split(',')
@@ -54,6 +54,8 @@ def fpower(strings):
             fpower += (b + 1) * (l + 1) * int(focal)
     '''
     return fpower
+
+start_time = time()
 
 print(f"Total (Part1):", hash(strings))
 print(f"Total (Part2):", fpower(strings))
