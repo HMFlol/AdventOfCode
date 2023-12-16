@@ -50,7 +50,7 @@ positions_and_directions = [] # Create an empty list to store the tuples
 
 for dir in directions: # Iterate over each direction
     for pos in grid: # Iterate over each position in the grid
-        if pos - dir not in grid: # If the new position is not in the grid, add the tuple to the list
+        if pos - dir not in grid: # If the new position is not in the grid, add the tuple to the list, to get starting positions OFF of the grid with the direction to move in
             positions_and_directions.append((pos - dir, dir))
 
 '''result = 0
