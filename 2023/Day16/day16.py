@@ -30,13 +30,27 @@ def startBlasting(startpos, startdir):
                     dir = -1 # hitting from top or bottom
                     nextlaser.append((pos, -dir))  # add a new laser with the opposite direction
                 case '/':
-                    dir = -complex(dir.imag, dir.real)  # rotate -90 degrees
+                    dir = -complex(dir.imag, dir.real)  # rotate + or - 90 degrees depending on directionality
                 case '\\':
-                    dir = complex(dir.imag, dir.real)  # rotate 90 degrees
+                    dir = complex(dir.imag, dir.real)  # rotate + or - 90 degrees depending on directionality
                 case None:
                     break
         
     return len(set(pos for pos, _ in path)) - 1 # subtract 1 because we don't count the starting position
+
+    '''
+    The above method of handling rotations is cleaner and more efficient. I have an explanation of how the above complex statements work at the bottom of this file. However, this also works and is easier to understand.
+    case '/':
+        if dir.real:  # if moving horizontally
+            dir *= -1j  # rotate -90 degrees
+        else:  # if moving vertically
+            dir *= 1j  # rotate 90 degrees
+    case '\\':
+        if dir.real:  # if moving horizontally
+            dir *= 1j  # rotate 90 degrees
+        else:  # if moving vertically
+            dir *= -1j  # rotate -90 degrees
+    '''
 
 
 start_time = time()
@@ -103,4 +117,17 @@ for r in range(max_row + 1):
     for c in range(max_col + 1):
         print(grid.get(c + 1j * r, ' '), end='')
     print() 
+'''
+'''
+The expression -complex(dir.imag, dir.real) is creating a new complex number and then negating it.
+
+Here's how it works:
+
+complex(dir.imag, dir.real): This creates a new complex number. The complex function takes two arguments: the real part and the imaginary part of the complex number. In this case, dir.imag and dir.real are being used as the real and imaginary parts, respectively. This effectively swaps the real and imaginary parts of dir.
+
+-: This negates the complex number created in the previous step. Negating a complex number means changing the sign of both its real and imaginary parts.
+
+The overall effect of -complex(dir.imag, dir.real) is to rotate the direction represented by dir by -90 degrees in the complex plane. This is because in the complex plane, swapping the real and imaginary parts of a complex number and then negating it corresponds to a -90 degrees rotation.
+
+For example, if dir is 1 + 0j (which represents a direction to the right), -complex(dir.imag, dir.real) is -0 - 1j, which represents a direction downwards. This is a -90 degrees rotation from the original direction.
 '''
