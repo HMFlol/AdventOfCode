@@ -6,10 +6,11 @@ from aocd import get_data
 from time import time
 
 data = get_data(day=16, year=2023)
-# data = open('test.txt').read()
+data = open('test.txt').read()
 data = data.strip().splitlines()
 
-grid = {complex(c,r): col for r, row in enumerate(data) for c, col in enumerate(row)}
+grid = {complex(x,y): val for y, row in enumerate(data) for x, val in enumerate(row)}
+print(grid)
 
 def startBlasting(startpos, startdir):
     nextlaser = [(startpos, startdir)]
