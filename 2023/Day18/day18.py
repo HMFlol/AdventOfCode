@@ -3,11 +3,11 @@ from time import time
 from shapely.geometry.polygon import Polygon
 
 data = get_data(day=18, year=2023)
-# data = open('test.txt').read()
+data = open('test.txt').read()
 data = [line.split() for line in data.splitlines()]
 
 # Pick's theorem says: A = i + b/2 - 1, where i is the number of interior points and b is the number of exterior points.
-# Thus, i + b = A + b/2 + 1
+# Thus, i = A + b/2 + 1
 
 directions = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1), '3': (-1, 0), '1': (1, 0), '2': (0, -1), '0': (0, 1)}
 
@@ -104,11 +104,10 @@ def hn(colour):
 
 
 
-
 start_time = time()
 
-print(f"Total (Part1):", shoelacePick(False))
-print(f"Total (Part2):", shoelacePick(True))
+# print(f"Total (Part1):", shoelacePick(False))
+# print(f"Total (Part2):", shoelacePick(True))
 
 '''print(f"Total (Part1) wtf:", wtf(False))
 print(f"Total (Part2) wtf:", wtf(True))'''
@@ -116,8 +115,8 @@ print(f"Total (Part2) wtf:", wtf(True))'''
 '''print(f"Total (Part1) complex:", complex(False))
 print(f"Total (Part2) complex:", complex(True))'''
 
-'''print(f"Total (Part1) hn:", hn(False))
-print(f"Total (Part2) hn:", hn(True))'''
+print(f"Total (Part1) hn:", hn(False))
+print(f"Total (Part2) hn:", hn(True))
 
 end_time = time()
 print(f"Total execution time: {end_time - start_time:.6f} seconds")
