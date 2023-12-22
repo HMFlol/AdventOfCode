@@ -54,13 +54,15 @@ start_time = time()
 
 imFalling(bricks) # drop the bricks once to get their tower positions before we do stuff
 
-results = [imFalling(bricks.copy(), skip=i) for i in range(n)]
+results = [imFalling(bricks.copy(), skip=i) for i in range(n)] # take a copy of the nicely stacked bricks and send it through skipping one brick at a time
 '''
 Test data results look like this:
 
 [(False, 6), (True, 0), (True, 0), (True, 0), (True, 0), (False, 1), (True, 0)]
 
 False = 0 and True =  1, so we can just sum the first and second elements of each tuple and get the total number of bricks that fell(if they did) (from False) as well as the total number of bricks we can remove and not have any bricks fall(True results).
+
+zip sticks these into two tuples (False, True, True, True, True, False, True) and (6,0,0,0,0,1,0), and map(sum) sums the first and second elements of each tuple in the results list, which represent the total number of simulations where no bricks have fallen and the total number of fallen bricks, respectively.
 '''
 part1, part2 = map(sum, zip(*results)) 
 
