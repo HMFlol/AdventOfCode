@@ -10,7 +10,7 @@ bricks = [] # created a list of the bricks, sorted by z value
 for line in data:
     coords = list(map(int, line.replace('~', ',').split(',')))
     bricks.append(coords)
-bricks = sorted(bricks, key=lambda x: x[2])
+bricks = sorted(bricks, key=lambda x: x[2]) # sort the bricks by z value
 
 n = len(bricks) # how many bricks we have
 
