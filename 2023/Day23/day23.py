@@ -20,12 +20,12 @@ points = [start, end]
 for pos, ch in grid.items():
     if ch == "#":
         continue
-    NEIGHBORS = 0
+    BRANCHES = 0
     for d in [-1, 1, 1j, -1j]:
         npos = pos + d
         if npos in grid and grid[npos] != "#":
-            NEIGHBORS += 1
-    if NEIGHBORS >= 3:
+            BRANCHES += 1
+    if BRANCHES >= 3:
         points.append(pos)
 
 dirs = {
