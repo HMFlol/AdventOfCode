@@ -6,8 +6,8 @@ from time import time
 from aocd import get_data
 
 data = get_data(day=23, year=2023)
-with open("test.txt", "r", encoding="utf-8") as file:
-    data = file.read()
+"""with open("test.txt", "r", encoding="utf-8") as file:
+    data = file.read()"""
 data = data.strip().splitlines()
 
 grid = {complex(x, y): val for x, row in enumerate(data) for y, val in enumerate(row)}

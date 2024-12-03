@@ -17,3 +17,4 @@ test*.txt
 2023/Day22/day22learn.py
 2023/Day23/day23learn.py
 2023/Day24/day24learn.py
+*venv*
