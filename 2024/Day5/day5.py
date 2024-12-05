@@ -34,8 +34,8 @@ def updates2():
         if page in visited:
             return
         visited.add(page)
-        for neighbor in [b for [a,b] in rules if a == page and b in update]: # Iterate over all neightbors of the page 
-            dfs(neighbor) # Resursively visit each neightbor
+        for num2 in [num2 for [num1,num2] in rules if num1 == page and num2 in update]: # Iterate over all num2 of the page 
+            dfs(num2) # Resursively visit each num2
         sorted_update.append(page) # Append the page to the sorted_update list
 
     total = 0
