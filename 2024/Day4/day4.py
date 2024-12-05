@@ -55,8 +55,8 @@ def searchX_MAS(grid):
 
 start_time = time()
 
-print(f"Total (Part1):", searchXMAS(grid))
-print(f"Total (Part2):", searchX_MAS(grid))
+print(f"Part1:", searchXMAS(grid))
+print(f"Part2:", searchX_MAS(grid))
 
 end_time = time()
-print(f"Total execution time: {end_time - start_time:.6f} seconds")
+print(f"Time: {end_time - start_time:.6f} seconds")

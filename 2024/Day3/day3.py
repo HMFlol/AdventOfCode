@@ -31,8 +31,8 @@ def mul2():
 
 start_time = time()
 
-print(f"Total (Part1):", mul1())
-print(f"Total (Part2):", mul2())
+print(f"Part1:", mul1())
+print(f"Part2:", mul2())
 
 end_time = time()
-print(f"Total execution time: {end_time - start_time:.6f} seconds")
+print(f"Time: {end_time - start_time:.6f} seconds")

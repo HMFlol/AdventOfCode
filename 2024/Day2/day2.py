@@ -39,8 +39,8 @@ def safe2(reports):
 
 start_time = time()
 
-print(f"Total (Part1):", len(safe1(data)))
-print(f"Total (Part2):", len(safe2(data)))
+print(f"Part1:", len(safe1(data)))
+print(f"Part2:", len(safe2(data)))
 
 end_time = time()
-print(f"Total execution time: {end_time - start_time:.6f} seconds")
+print(f"Time: {end_time - start_time:.6f} seconds")
