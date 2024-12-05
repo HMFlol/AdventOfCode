@@ -31,9 +31,9 @@ def updates1():
 # Part 2
 def updates2():
     def dfs(num):
-        if num in visited:
+        if num in checked:
             return
-        visited.add(num)
+        checked.add(num)
         for num2 in [num2 for [num1,num2] in rules if num1 == num and num2 in update]: # Iterate over all num2 of the page 
             dfs(num2) # Resursively visit each num2
         sorted_update.append(num) # Append the page to the sorted_update list
@@ -42,7 +42,7 @@ def updates2():
     # Find the baddies first
     for update in updates:
         sorted_update = []
-        visited = set()
+        checked = set()
         pair_exists = False
         for num1 in range(len(update)):
             for num2 in range(num1 + 1, len(update)):
