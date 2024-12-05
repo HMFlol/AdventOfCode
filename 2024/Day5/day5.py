@@ -30,13 +30,13 @@ def updates1():
 
 # Part 2
 def updates2():
-    def dfs(page):
-        if page in visited:
+    def dfs(num):
+        if num in visited:
             return
-        visited.add(page)
-        for num2 in [num2 for [num1,num2] in rules if num1 == page and num2 in update]: # Iterate over all num2 of the page 
+        visited.add(num)
+        for num2 in [num2 for [num1,num2] in rules if num1 == num and num2 in update]: # Iterate over all num2 of the page 
             dfs(num2) # Resursively visit each num2
-        sorted_update.append(page) # Append the page to the sorted_update list
+        sorted_update.append(num) # Append the page to the sorted_update list
 
     total = 0
     # Find the baddies first
@@ -54,8 +54,8 @@ def updates2():
 
         if pair_exists:
             # Sort the update according to the rules using topological sort.  
-            for page in update:
-                dfs(page) # Perform DFS to sort the update topologically
+            for num in update:
+                dfs(num) # Perform DFS to sort the update topologically
             m_index = len(sorted_update)//2
             total += int(sorted_update[m_index])
 
