@@ -8,7 +8,7 @@ data = get_data(day=6, year=2024)
 # data = open('test.txt').read()
 data = data.strip().splitlines()
 
-grid = {complex(x,y): val for x, row in enumerate(data) for y, val in enumerate(row)}
+grid = {complex(x,y): val for y, row in enumerate(data) for x, val in enumerate(row)}
 
 startpos = [key for key, val in grid.items() if val == '^'][0]
 pos = startpos
@@ -16,10 +16,10 @@ dir = -1
 
 # Define direction transitions
 TURN_RIGHT = {
-    -1: 1j,    # North -> East
-    1j: 1,      # East -> South
-    1: -1j,      # South -> West
-    -1j: -1     # West -> North
+    -1j: 1,    # North -> East
+    1: 1j,      # East -> South
+    1j: -1,      # South -> West
+    -1: -1j     # West -> North
 }
 
 # Pathing function - returns a set of all visited positions // loops count if loop_time is True
@@ -73,8 +73,10 @@ print(f"Time: {end_time - start_time:.6f} seconds")
 max_row = int(max(key.imag for key in grid.keys()))
 max_col = int(max(key.real for key in grid.keys()))
 
-# Print it
+# Print the grid row by row
 for r in range(max_row + 1):
+    row_str = ''
     for c in range(max_col + 1):
-        print(grid.get(r + 1j * c, ' '), end='')
-    print() """
+        pos = complex(c, r)  # real=c (column), imag=r (row)
+        row_str += grid.get(pos, ' ')
+    print(row_str) """
