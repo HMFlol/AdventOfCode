@@ -50,12 +50,9 @@ def find_loops(grid):
     loops = 0
 
     for obstacle in path:
-        og_val = grid.get(obstacle)
         grid[obstacle] = '#'
-
         loops += pathing(grid, loop_time=True)
-
-        grid[obstacle] = og_val
+        grid[obstacle] = '.'
 
     return loops
 
