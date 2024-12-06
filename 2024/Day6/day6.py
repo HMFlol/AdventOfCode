@@ -4,10 +4,8 @@
 from aocd import get_data
 from time import time
 
-from copy import deepcopy
-
-# data = get_data(day=6, year=2024)
-data = open('test.txt').read()
+data = get_data(day=6, year=2024)
+# data = open('test.txt').read()
 data = data.strip().splitlines()
 
 grid = {complex(x,y): val for x, row in enumerate(data) for y, val in enumerate(row)}
@@ -16,27 +14,35 @@ startpos = [key for key, val in grid.items() if val == '^'][0]
 pos = startpos
 dir = -1
 
+# Define direction transitions
+TURN_RIGHT = {
+    -1: 1j,    # North -> East
+    1j: 1,      # East -> South
+    1: -1j,      # South -> West
+    -1j: -1     # West -> North
+}
+
 # Pathing function - returns a set of all visited positions // loops count if loop_time is True
 def pathing(grid, loop_time=False):
     pos, dir, path = startpos, -1, set()
-    loop=False
 
     while True:
-        if (pos, dir) in path: # If we've been here before break, or if detecting loops, loop=True first
+        state = (pos, dir)
+        if state in path: # If we've been here before break, or if detecting loops, loop=True first
             if loop_time:
-                loop=True
+                return True
             break
-        path.add((pos, dir))
-        next_pos = pos + dir
+        path.add(state)
+        next_pos = pos + dir # Calculate next position
         match grid.get(next_pos):
             case '#':
-                dir *= -1j # Turn right (U, R, D, L = -1, -1j, 1, 1j)
+                dir = TURN_RIGHT.get(dir, dir) # Turn right
             case None:
                 break
             case _:
                 pos = next_pos
 
-    return {pos for pos, _ in path} if not loop_time else loop
+    return {pos for pos, _ in path} if not loop_time else False
 
 # Part 2 loop finding
 def find_loops(grid):
@@ -44,9 +50,12 @@ def find_loops(grid):
     loops = 0
 
     for obstacle in path:
-        new_grid = deepcopy(grid) # Making copy of the grid to check for loops one obstacle at a time
-        new_grid[obstacle] = '#'
-        loops += pathing(new_grid, loop_time=True)
+        og_val = grid.get(obstacle)
+        grid[obstacle] = '#'
+
+        loops += pathing(grid, loop_time=True)
+
+        grid[obstacle] = og_val
 
     return loops
 
