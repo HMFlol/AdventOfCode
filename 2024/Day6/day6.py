@@ -12,22 +12,9 @@ data = data.strip().splitlines()
 
 grid = {complex(x,y): val for x, row in enumerate(data) for y, val in enumerate(row)}
 
-""" # How to print the grid with complex numbers
-# Get the max row and column
-max_row = int(max(key.imag for key in grid.keys()))
-max_col = int(max(key.real for key in grid.keys()))
-
-# Print it
-for r in range(max_row + 1):
-    for c in range(max_col + 1):
-        print(grid.get(r + 1j * c, ' '), end='')
-    print() """
-
 startpos = [key for key, val in grid.items() if val == '^'][0]
 pos = startpos
 dir = -1
-
-# N, E, S, W = -1, 1j, 1, -1j
 
 # Pathing function - returns a set of all visited positions // loops count if loop_time is True
 def pathing(grid, loop_time=False):
@@ -43,7 +30,7 @@ def pathing(grid, loop_time=False):
         next_pos = pos + dir
         match grid.get(next_pos):
             case '#':
-                dir *= -1j # Turn right
+                dir *= -1j # Turn right (U, R, D, L = -1, -1j, 1, 1j)
             case None:
                 break
             case _:
@@ -71,3 +58,14 @@ print(f"Part2:", find_loops(grid))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")
+
+""" # How to print the grid with complex numbers
+# Get the max row and column
+max_row = int(max(key.imag for key in grid.keys()))
+max_col = int(max(key.real for key in grid.keys()))
+
+# Print it
+for r in range(max_row + 1):
+    for c in range(max_col + 1):
+        print(grid.get(r + 1j * c, ' '), end='')
+    print() """
