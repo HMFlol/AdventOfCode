@@ -8,19 +8,20 @@ data = get_data(day=6, year=2024)
 # data = open('test.txt').read()
 data = data.strip().splitlines()
 
-grid = {complex(x,y): val for y, row in enumerate(data) for x, val in enumerate(row)}
+grid = {complex(x, y): val for y, row in enumerate(data) for x, val in enumerate(row)}
 
-startpos = [key for key, val in grid.items() if val == '^'][0]
+startpos = [key for key, val in grid.items() if val == "^"][0]
 pos = startpos
 dir = -1
 
 # Define direction transitions
 TURN_RIGHT = {
-    -1j: 1,    # North -> East
-    1: 1j,      # East -> South
-    1j: -1,      # South -> West
-    -1: -1j     # West -> North
+    -1j: 1,  # North -> East
+    1: 1j,  # East -> South
+    1j: -1,  # South -> West
+    -1: -1j,  # West -> North
 }
+
 
 # Pathing function - returns a set of all visited positions // loops count if loop_time is True
 def pathing(grid, loop_time=False):
@@ -28,15 +29,15 @@ def pathing(grid, loop_time=False):
 
     while True:
         state = (pos, dir)
-        if state in path: # If we've been here before break, or if detecting loops, loop=True first
+        if state in path:  # If seen break, or if detecting loops, loop=True first
             if loop_time:
                 return True
             break
         path.add(state)
-        next_pos = pos + dir # Calculate next position
+        next_pos = pos + dir  # Calculate next position
         match grid.get(next_pos):
-            case '#':
-                dir = TURN_RIGHT.get(dir, dir) # Turn right
+            case "#":
+                dir = TURN_RIGHT.get(dir, dir)  # Turn right
             case None:
                 break
             case _:
@@ -44,15 +45,16 @@ def pathing(grid, loop_time=False):
 
     return {pos for pos, _ in path} if not loop_time else False
 
+
 # Part 2 loop finding
 def find_loops(grid):
     path = pathing(grid)
     loops = 0
 
-    for obstacle in path:
-        grid[obstacle] = '#'
+    for cell in path:
+        grid[cell] = "#"
         loops += pathing(grid, loop_time=True)
-        grid[obstacle] = '.'
+        grid[cell] = "."
 
     return loops
 
