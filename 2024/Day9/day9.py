@@ -91,13 +91,13 @@ start_time = time()
 
 def load_data(use_test_data=False):
     if use_test_data:
-        with open("test.txt") as f:  # noqa: PTH123
+        with open("test.txt") as f:
             return f.read()
     else:
         return get_data(day=9, year=2024)
 
 
-data = list(load_data(use_test_data=0))
+data = list(load_data(use_test_data=1))
 
 print("Part1:", checksum1(data))
 print("Part2:", checksum2(data))

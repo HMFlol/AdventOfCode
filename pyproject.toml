@@ -34,8 +34,8 @@ exclude = [
 line-length = 120
 indent-width = 4
 
-# Assume Python 3.9
-target-version = "py39"
+# Assume Python 3.11
+target-version = "py311"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
@@ -75,6 +75,8 @@ ignore = [
     "E501",
     "F401",
     "TRY003",  # Avoid specifying messages outside exception class; overly strict, especially for ValueError
+    "PTH123",  # Use `pathlib` objects instead of `os.path` functions; overly strict, especially for `os.path.join`
+    "SIM115",
 ]
 
 

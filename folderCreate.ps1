@@ -38,10 +38,10 @@ start_time = time()
 
 def load_data(use_test_data=False):
     if use_test_data:
-        with open("test.txt") as f:  # noqa: PTH123
+        with open("test.txt") as f:
             return f.read()
     else:
-        return get_data(day=9, year=2024)
+        return get_data(day=$i, year=$year)
 
 
 data = list(load_data(use_test_data=0))

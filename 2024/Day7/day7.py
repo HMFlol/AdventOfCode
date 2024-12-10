@@ -1,11 +1,12 @@
 # Solution for Advent of Code 2024, Day 7
 # https://adventofcode.com/2024/day/7
 
-from aocd import get_data
 from time import time
 
-data = get_data(day=7, year=2024)
-# data = open("test.txt").read()
+from aocd import get_data
+
+# data = get_data(day=7, year=2024)
+data = open("test.txt").read()
 data = [list(map(int, line.replace(":", "").split())) for line in data.splitlines()]
 
 
@@ -50,8 +51,8 @@ for line in data:
     if tester(target, numbers, True):
         totalp2 += target
 
-print(f"Part1:", totalp1)
-print(f"Part2:", totalp2)
+print("Part1:", totalp1)
+print("Part2:", totalp2)
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")

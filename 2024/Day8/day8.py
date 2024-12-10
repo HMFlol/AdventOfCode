@@ -1,20 +1,16 @@
 # Solution for Advent of Code 2024, Day 8
 # https://adventofcode.com/2024/day/8
 
-from aocd import get_data
+from itertools import combinations
 from time import time
 
-from itertools import combinations
+from aocd import get_data
 
 data = get_data(day=8, year=2024)
 # data = open("test.txt").read()
 data = data.strip().splitlines()
 
-grid = {
-    complex(col, row): val
-    for row, line in enumerate(data)
-    for col, val in enumerate(line)
-}
+grid = {complex(col, row): val for row, line in enumerate(data) for col, val in enumerate(line)}
 
 # row and col length
 rows = int(max(pos.imag for pos in grid)) + 1
@@ -37,9 +33,7 @@ def antinodes(antennas):
             antinodes.add(2 * ant1 - ant2)
             antinodes.add(2 * ant2 - ant1)
     # Return the number of antinodes within the grid
-    return len(
-        [0 for pos in antinodes if 0 <= pos.imag < rows and 0 <= pos.real < cols]
-    )
+    return len([0 for pos in antinodes if 0 <= pos.imag < rows and 0 <= pos.real < cols])
 
 
 # Part 2
@@ -65,8 +59,8 @@ def resonance(antennas):
 
 start_time = time()
 
-print(f"Part1:", antinodes(antennas))
-print(f"Part2:", resonance(antennas))
+print("Part1:", antinodes(antennas))
+print("Part2:", resonance(antennas))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")

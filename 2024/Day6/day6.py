@@ -1,8 +1,9 @@
 # Solution for Advent of Code 2024, Day 6
 # https://adventofcode.com/2024/day/6
 
-from aocd import get_data
 from time import time
+
+from aocd import get_data
 
 data = get_data(day=6, year=2024)
 # data = open('test.txt').read()
@@ -61,8 +62,8 @@ def find_loops(grid):
 
 start_time = time()
 
-print(f"Part1:", len(pathing(grid)))
-print(f"Part2:", find_loops(grid))
+print("Part1:", len(pathing(grid)))
+print("Part2:", find_loops(grid))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")
