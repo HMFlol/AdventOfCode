@@ -6,41 +6,15 @@ from time import time
 from aocd import get_data
 
 
-# Part 1
-def trailhead_scores(grid):
+# Part 1 + 2
+def trailhead_scores(grid, part1=True):
     directions = [(-1, 0), (0, -1), (0, 1), (1, 0)]
     trailheads = [pos for pos, val in grid.items() if val == "0"]
 
     score = 0
 
     for trailhead in trailheads:
-        stack = [(trailhead, 0)]
-        visited = {trailhead}
-
-        while stack:
-            pos, height = stack.pop()
-            if height == 9:
-                score += 1
-                continue
-
-            for dir in directions:
-                next_pos = pos + complex(*dir)
-                if next_pos in grid and grid[next_pos] == str(height + 1) and next_pos not in visited:
-                    visited.add(next_pos)
-                    stack.append((next_pos, height + 1))
-                    print(visited)
-
-    return score
-
-
-# Part 2
-def trailhead_scores2(grid):
-    directions = [(-1, 0), (0, -1), (0, 1), (1, 0)]
-    trailheads = [pos for pos, val in grid.items() if val == "0"]
-
-    score = 0
-
-    for trailhead in trailheads:
+        visited = {trailhead} if part1 else set()
         stack = [(trailhead, 0)]
 
         while stack:
@@ -51,7 +25,8 @@ def trailhead_scores2(grid):
 
             for dir in directions:
                 next_pos = pos + complex(*dir)
-                if next_pos in grid and grid[next_pos] == str(height + 1):
+                if grid.get(next_pos) == str(height + 1) and next_pos not in visited:
+                    visited.add(next_pos) if part1 else None
                     stack.append((next_pos, height + 1))
 
     return score
@@ -76,7 +51,7 @@ data = data.strip().splitlines()
 grid = {complex(col, row): val for row, line in enumerate(data) for col, val in enumerate(line)}
 
 print("Part1:", trailhead_scores(grid))
-print("Part2:", trailhead_scores2(grid))
+print("Part2:", trailhead_scores(grid, False))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")
