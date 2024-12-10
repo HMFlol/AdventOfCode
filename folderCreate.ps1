@@ -26,16 +26,28 @@ for ($i = 1; $i -le 25; $i++) {
 # Solution for Advent of Code $year, Day $i
 # https://adventofcode.com/$year/day/$i
 
-from aocd import get_data
 from time import time
 
-data = get_data(day=$i, year=$year)
-# data = open('test.txt').read()
-# data = [line.split() for line in data.splitlines()]
+from aocd import get_data
+
 
 # Problem things go here :)
 
 start_time = time()
+
+
+def load_data(use_test_data=False):
+    if use_test_data:
+        with open("test.txt") as f:  # noqa: PTH123
+            return f.read()
+    else:
+        return get_data(day=9, year=2024)
+
+
+data = list(load_data(use_test_data=0))
+
+# Parsing stuff
+data = [line.split() for line in data.splitlines()]
 
 print(f"Part1:",)
 print(f"Part2:",)
