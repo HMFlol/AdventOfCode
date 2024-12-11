@@ -8,8 +8,7 @@ from aocd import get_data
 
 # Part 1 + 2
 def trailhead_scores(grid, part1=True):
-    directions = [(-1, 0), (0, -1), (0, 1), (1, 0)]
-    trailheads = [pos for pos, val in grid.items() if val == "0"]
+    trailheads = [pos for pos, val in grid.items() if val == 0]
 
     score = 0
 
@@ -23,9 +22,9 @@ def trailhead_scores(grid, part1=True):
                 score += 1
                 continue
 
-            for dir in directions:
-                next_pos = pos + complex(*dir)
-                if grid.get(next_pos) == str(height + 1) and next_pos not in visited:
+            for dir in (1, -1, 1j, -1j):  # 1 = right, -1 = left, 1j = down, -1j = up
+                next_pos = pos + dir
+                if grid.get(next_pos) == height + 1 and next_pos not in visited:
                     visited.add(next_pos) if part1 else None
                     stack.append((next_pos, height + 1))
 
@@ -48,7 +47,8 @@ data = load_data(use_test_data=1)
 # Parsing stuff
 data = data.strip().splitlines()
 
-grid = {complex(col, row): val for row, line in enumerate(data) for col, val in enumerate(line)}
+grid = {col + row * 1j: int(val) for row, line in enumerate(data) for col, val in enumerate(line)}
+
 
 print("Part1:", trailhead_scores(grid))
 print("Part2:", trailhead_scores(grid, False))

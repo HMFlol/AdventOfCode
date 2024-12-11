@@ -11,8 +11,8 @@ $gitignoreEntries = Get-Content -Path $gitignorePath -ErrorAction SilentlyContin
 Write-Host "Creating directories and files for Advent of Code $year"
 Write-Host "================="
 
-for ($i = 1; $i -le 25; $i++) {
-    $dayDir = "$year\Day$i"
+for ($day = 1; $day -le 25; $day++) {
+    $dayDir = "$year\Day$day"
     if (-Not (Test-Path -Path $dayDir)) {
         New-Item -ItemType Directory -Path "$dayDir" | Out-Null
         Write-Host "Created directory $dayDir... ✓" -ForegroundColor Green
@@ -20,16 +20,15 @@ for ($i = 1; $i -le 25; $i++) {
         Write-Host "Directory $dayDir already exists, skipping... ✗" -ForegroundColor Red
     }
 
-    $pyFile = "$dayDir\day$i.py"
+    $pyFile = "$dayDir\day$day.py"
     if (-Not (Test-Path -Path $pyFile)) {    
         $pyfileContent = @"
-# Solution for Advent of Code $year, Day $i
-# https://adventofcode.com/$year/day/$i
+# Solution for Advent of Code $year, Day $day
+# https://adventofcode.com/$year/day/$day
 
 from time import time
 
 from aocd import get_data
-
 
 # Problem things go here :)
 
@@ -41,19 +40,24 @@ def load_data(use_test_data=False):
         with open("test.txt") as f:
             return f.read()
     else:
-        return get_data(day=$i, year=$year)
+        return get_data(day=$day, year=$year)
 
 
-data = list(load_data(use_test_data=0))
+data = list(load_data(use_test_data=1))
 
 # Parsing stuff
 data = [line.split() for line in data.splitlines()]
 
-print(f"Part1:",)
-print(f"Part2:",)
+print(
+    "Part1:",
+)
+print(
+    "Part2:",
+)
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")
+
 "@
         $pyfileContent | Set-Content -Path $pyFile
         Write-Host "Created file $pyFile... ✓" -ForegroundColor Green
@@ -80,7 +84,7 @@ print(f"Time: {end_time - start_time:.6f} seconds")
     $readmeFile = "$dayDir\README.md"
     if (-Not (Test-Path -Path $readmeFile)) {
         $readmeContent = @"
-# Advent of Code $year, Day $i
+# Advent of Code $year, Day $day
 "@
     $readmeContent | Set-Content -Path "$dayDir\README.md"
     Write-Host "Created file $readmeFile... ✓" -ForegroundColor Green
@@ -88,7 +92,7 @@ print(f"Time: {end_time - start_time:.6f} seconds")
         Write-Host "File $readmeFile already exists, skipping... ✗" -ForegroundColor Red
     }
 
-    $gitignoreEntry = "$year/day$i"
+    $gitignoreEntry = "$year/day$day"
     if ($gitignoreEntries -notcontains $gitignoreEntry) {
         Add-Content -Path $gitignorePath -Value $gitignoreEntry
         Write-Host "Added $gitignoreEntry to .gitignore... ✓" -ForegroundColor Green

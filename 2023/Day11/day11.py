@@ -2,14 +2,16 @@
 Redid this using actual math to change the indexes after "inserting" rows and columns
 The rest is essentially the same
 """
-from aocd import data
+
 from itertools import combinations
 from time import time
+
+from aocd import data
 
 starttime = time()
 
 # Gridding
-grid = [list(line) for line in data.split('\n')]
+grid = [list(line) for line in data.split("\n")]
 
 # Get the rows of all dots
 all_dots_r = []
@@ -23,16 +25,17 @@ for c, col in enumerate(zip(*grid)):
     if all(ch == "." for ch in col):
         all_dots_c.append(c)
 
+
 def calculate_sum_of_distances(expansion):
     # Get the indices of the empty rows and columns
     def get_index_after_inserts(index, empty_indices):
         return index + sum(1 for i in empty_indices if i < index) * (expansion - 1)
-            
+
     # Get the hashes
     hashes = []
     for r in range(len(grid)):
         for c in range(len(grid[0])):
-            if grid[r][c] == '#':
+            if grid[r][c] == "#":
                 # Adjust the coordinates to account for the inserted rows and columns
                 r_adjusted = get_index_after_inserts(r, all_dots_r)
                 c_adjusted = get_index_after_inserts(c, all_dots_c)
@@ -42,7 +45,7 @@ def calculate_sum_of_distances(expansion):
     def manhattanDist(pair):
         X1, Y1 = pair[0]
         X2, Y2 = pair[1]
-        
+
         return abs(X2 - X1) + abs(Y2 - Y1)
 
     upairs = combinations(hashes, 2)
@@ -58,6 +61,7 @@ def calculate_sum_of_distances(expansion):
     dists = list(map(manhattanDist, upairs))
 
     return sum(dists)
+
 
 expansionp1 = 2
 expansionp2 = 1000000
