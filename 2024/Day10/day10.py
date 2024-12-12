@@ -22,7 +22,7 @@ def trailhead_scores(grid, part1=True):
                 score += 1
                 continue
 
-            for dir in (1, -1, 1j, -1j):  # 1 = right, -1 = left, 1j = down, -1j = up
+            for dir in (1, -1, 1j, -1j):
                 next_pos = pos + dir
                 if grid.get(next_pos) == height + 1 and next_pos not in visited:
                     visited.add(next_pos) if part1 else None
