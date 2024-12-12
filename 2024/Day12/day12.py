@@ -13,7 +13,6 @@ start_time = time()
 def find_regions(grid):
     visited = set()
     regions = []
-    region_id = 1
 
     for cell, char in grid.items():
         if cell in visited:
@@ -29,9 +28,8 @@ def find_regions(grid):
                     next_pos = pos + dir
                     if grid.get(next_pos) == char and next_pos not in visited:
                         stack.append(next_pos)
-        region_name = char + str(region_id)
-        regions.append((region_name, region))
-        region_id += 1
+        regions.append(region)
+
     return regions
 
 
@@ -83,7 +81,7 @@ def load_data(use_test_data=False):
         return get_data(day=12, year=2024)
 
 
-data = load_data(use_test_data=0)
+data = load_data(use_test_data=1)
 
 # Parsing stuff
 data = data.strip().splitlines()
@@ -92,8 +90,8 @@ grid = {col + row * 1j: val for row, line in enumerate(data) for col, val in enu
 
 regions = find_regions(grid)
 
-print("Part1:", sum(calculate_edge_price(region, grid) for _, region in regions))
-print("Part2:", sum(calculate_side_price(region) for _, region in regions))
+print("Part1:", sum(calculate_edge_price(region, grid) for region in regions))
+print("Part2:", sum(calculate_side_price(region) for region in regions))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")
