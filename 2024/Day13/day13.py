@@ -14,7 +14,7 @@ def find_spend(section):
     """ pattern = r"Button A: X\\+(\\d+), Y\\+(\\d+)\nButton B: X\\+(\\d+), Y\\+(\\d+)\nPrize: X=(\\d+), Y=(\\d+)"
     match = re.findall(pattern, section)
     ax, ay, bx, by, px, py = map(int, match[0]) """
-    big_px, big_py = px + 10000000000000, py + 10000000000000
+    big_px, big_py = px + 10**13, py + 10**13
 
     # Cramers Rule
     a_presses1 = (px * by - py * bx) / (ax * by - ay * bx)
