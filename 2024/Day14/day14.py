@@ -45,20 +45,16 @@ def safety(data):
 
 
 def easteregg(data):
-    bots = []
-
-    for line in data.strip().splitlines():
-        px, py, vx, vy = map(int, re.findall(r"(-?\d+)", line))
-        bots.append(((px, py), (vx, vy)))
-    # Get all of the initial positions and velocities for the bots
-    positions = np.array([bot[0] for bot in bots])
-    velocities = np.array([bot[1] for bot in bots])
+    positions, velocities = (
+        np.array([list(map(int, re.findall(r"(-?\d+)", line)))[:2] for line in data.strip().splitlines()]),
+        np.array([list(map(int, re.findall(r"(-?\d+)", line)))[2:] for line in data.strip().splitlines()]),
+    )
 
     seconds = 0
+    # Create the grid of 0s
+    grid = np.zeros((HEIGHT, WIDTH), dtype=int)
 
     while True:
-        # Create the grid of 0s
-        grid = np.zeros((HEIGHT, WIDTH), dtype=int)
         seconds += 1
         # Calculate the new position after x seconds, modulo w and h to wrap
         new_positions = (positions + seconds * velocities) % [WIDTH, HEIGHT]
