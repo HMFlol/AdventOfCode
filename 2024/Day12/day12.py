@@ -85,8 +85,10 @@ data = load_data(use_test_data=1)
 
 # Parsing stuff
 data = data.strip().splitlines()
+print(data)
 
 grid = {col + row * 1j: val for row, line in enumerate(data) for col, val in enumerate(line)}
+print(grid)
 
 regions = find_regions(grid)
 

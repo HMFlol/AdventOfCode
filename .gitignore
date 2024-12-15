@@ -19,7 +19,6 @@ test*.txt
 2023/Day24/day24learn.py
 *venv*
 *aoc20*
-2024/day15
 2024/day16
 2024/day17
 2024/day18
@@ -30,3 +29,4 @@ test*.txt
 2024/day23
 2024/day24
 2024/day25
+*stuff*
