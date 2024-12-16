@@ -43,10 +43,9 @@ def load_data(use_test_data=False):
         return get_data(day=$day, year=$year)
 
 
-data = list(load_data(use_test_data=1))
+data = load_data(use_test_data=1)
 
 # Parsing stuff
-data = [line.split() for line in data.splitlines()]
 
 print(
     "Part1:",
