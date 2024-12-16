@@ -13,16 +13,16 @@ def maze_score(grid):
     # Start facing east
     tie = 0
     heap = [(0, tie, start, 1, 0, 0, [start])]
-    dist = defaultdict(lambda: float("inf"))
+    min_score = defaultdict(lambda: float("inf"))
     seen = []
     best = float("inf")
 
     while heap:
         score, _, pos, dir, steps, turns, path = heappop(heap)
-        if score > dist[pos, dir]:
+        if score > min_score[pos, dir]:
             continue
         else:
-            dist[pos, dir] = score
+            min_score[pos, dir] = score
 
         if grid.get(pos) == "E" and score <= best:
             best = score
