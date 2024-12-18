@@ -31,8 +31,9 @@ def incoming_game(corruption, size, bytes):
 
 
 def user_wins(corruption, size, bytes):
-    # Linear search (~17s)
-    """Grid = np.full((size + 1, size + 1), ".", dtype=str)
+    """# Linear search (~17s).
+
+    grid = np.full((size + 1, size + 1), ".", dtype=str)
 
     for cell in corruption:
         grid[cell[1], cell[0]] = "#"
