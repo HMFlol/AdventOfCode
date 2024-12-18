@@ -27,7 +27,7 @@ def incoming_game(corruption, size, bytes):
             if 0 <= newx <= size and 0 <= newy <= size and grid[newx, newy] != "#":
                 stack.append((score + 1, (newx, newy)))
     # For Part 2 / user_wins function
-    return None
+    return False
 
 
 def user_wins(corruption, size, bytes):
@@ -56,11 +56,11 @@ def user_wins(corruption, size, bytes):
     # Will be somewhere between 1024, which has to have a path due to p1, and the length of the corruption list
     while bytes < corruption_len:
         mid = (bytes + corruption_len) // 2
-        steps = incoming_game(corruption, size, mid)
-        if steps is None:
-            corruption_len = mid
-        else:
+        if incoming_game(corruption, size, mid):
             bytes = mid + 1
+        else:
+            corruption_len = mid
+
     x, y = corruption[bytes - 1]
     return f"{x},{y}"
 
