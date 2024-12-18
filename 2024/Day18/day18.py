@@ -3,28 +3,22 @@
 from collections import deque
 from time import time
 
-import numpy as np
 from aocd import get_data
 
 
 def incoming_game(corruption, size, bytes):
-    grid = np.full((size + 1, size + 1), ".", dtype=str)
-    baddies = {*corruption[:bytes]}
-    for cell in baddies:
-        grid[cell[1], cell[0]] = "#"
-
-    seen = {}
+    seen = {*corruption[:bytes]}
     stack = deque([(0, (0, 0))])
 
     while stack:
         score, (x, y) = stack.popleft()
         if (x, y) == (size, size):
             return score
-        if (x, y) in seen and seen[(x, y)] <= score:
+        if (x, y) in seen:
             continue
-        seen[(x, y)] = score
+        seen.add((x, y))
         for newx, newy in [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]:
-            if 0 <= newx <= size and 0 <= newy <= size and grid[newx, newy] != "#":
+            if 0 <= newx <= size and 0 <= newy <= size:
                 stack.append((score + 1, (newx, newy)))
     # For Part 2 / user_wins function
     return False
