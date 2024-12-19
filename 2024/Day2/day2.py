@@ -40,8 +40,8 @@ def safe2(reports):
 
 start_time = time()
 
-print("Part1:", len(safe1(data)))
-print("Part2:", len(safe2(data)))
+print("\033[1mPart1:\033[22m:", len(safe1(data)))
+print("\033[1mPart2:\033[22m:", len(safe2(data)))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

@@ -54,8 +54,8 @@ grid = {col + row * 1j: val for row, line in enumerate(data) for col, val in enu
 # Parsing stuff
 p1, p2 = maze_score(grid)
 
-print("Part1:", p1)
-print("Part2:", p2)
+print("\033[1mPart1:\033[22m:", p1)
+print("\033[1mPart2:\033[22m:", p2)
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

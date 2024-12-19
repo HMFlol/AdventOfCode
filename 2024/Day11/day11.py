@@ -36,8 +36,8 @@ data = [int(num) for num in data.split()]
 p1 = sum(stonecalc(stone, 25) for stone in data)
 p2 = sum(stonecalc(stone, 75) for stone in data)
 
-print("Part1:", p1)
-print("Part2:", p2)
+print("\033[1mPart1:\033[22m:", p1)
+print("\033[1mPart2:\033[22m:", p2)
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

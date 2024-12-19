@@ -75,8 +75,8 @@ data = open(0).read().strip()
 # Parsing stuff
 rega, regb, regc, *program = map(int, re.findall(r"\d+", data))
 
-print("Part1:", ",".join(map(str, wtfprogram(rega, regb, regc, program))))
-print("Part2:", wtflowest(program, 0))
+print("\033[1mPart1:\033[22m:", ",".join(map(str, wtfprogram(rega, regb, regc, program))))
+print("\033[1mPart2:\033[22m:", wtflowest(program, 0))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

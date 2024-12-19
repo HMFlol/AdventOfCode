@@ -40,8 +40,8 @@ data = data.strip().splitlines()
 grid = {col + row * 1j: int(val) for row, line in enumerate(data) for col, val in enumerate(line)}
 
 
-print("Part1:", trailhead_scores(grid))
-print("Part2:", trailhead_scores(grid, False))
+print("\033[1mPart1:\033[22m", trailhead_scores(grid))
+print("\033[1mPart2:\033[22m", trailhead_scores(grid, False))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

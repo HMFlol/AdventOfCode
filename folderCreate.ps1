@@ -25,37 +25,25 @@ for ($day = 1; $day -le 25; $day++) {
         $pyfileContent = @"
 # Solution for Advent of Code $year, Day $day
 # https://adventofcode.com/$year/day/$day
-
-from time import time
-
-from aocd import get_data
+from time import perf_counter
 
 # Problem things go here :)
 
-start_time = time()
+start_time = perf_counter()
 
-
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=$day, year=$year)
-
-
-data = load_data(use_test_data=1)
+data = open(0).read().strip()
 
 # Parsing stuff
 
 print(
-    "Part1:",
+    "\033[1mPart1:\033[22m",
 )
 print(
-    "Part2:",
+    "\033[1mPart2:\033[22m",
 )
 
-end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+end_time = perf_counter()
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
 
 "@
         $pyfileContent | Set-Content -Path $pyFile

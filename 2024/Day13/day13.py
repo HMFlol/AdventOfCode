@@ -22,8 +22,8 @@ start_time = time()
 
 data = open(0).read().strip()
 
-print("Part1:", sum(find_spend(section) for section in data.strip().split("\n\n")))
-print("Part2:", sum(find_spend(section, 10**13) for section in data.strip().split("\n\n")))
+print("\033[1mPart1:\033[22m:", sum(find_spend(section) for section in data.strip().split("\n\n")))
+print("\033[1mPart2:\033[22m:", sum(find_spend(section, 10**13) for section in data.strip().split("\n\n")))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

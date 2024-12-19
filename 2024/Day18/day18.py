@@ -73,8 +73,8 @@ else:
     bytesize = 12
 
 
-print("Part1:", incoming_game(corruption, size, bytesize))
-print("Part2:", user_wins(corruption, size, bytesize))
+print("\033[1mPart1:\033[22m:", incoming_game(corruption, size, bytesize))
+print("\033[1mPart2:\033[22m:", user_wins(corruption, size, bytesize))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

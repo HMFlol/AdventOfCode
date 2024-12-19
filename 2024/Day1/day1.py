@@ -29,8 +29,8 @@ def counting():
 
 start_time = time()
 
-print("Part1:", diff())
-print("Part2:", counting())
+print("\033[1mPart1:\033[22m:", diff())
+print("\033[1mPart2:\033[22m:", counting())
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

@@ -91,8 +91,8 @@ data = open(0).read().strip()
 
 data = list(data)
 
-print("Part1:", checksum1(data))
-print("Part2:", checksum2(data))
+print("\033[1mPart1:\033[22m:", checksum1(data))
+print("\033[1mPart2:\033[22m:", checksum2(data))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

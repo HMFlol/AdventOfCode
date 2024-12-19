@@ -88,8 +88,8 @@ grid, moves = data.strip().split("\n\n")
 grid = grid.strip().splitlines()
 
 
-print("Part1:", warehouse(grid, moves))
-print("Part2:", embiggen(grid, moves))
+print("\033[1mPart1:\033[22m:", warehouse(grid, moves))
+print("\033[1mPart2:\033[22m:", embiggen(grid, moves))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

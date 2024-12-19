@@ -82,8 +82,8 @@ print(grid)
 
 regions = find_regions(grid)
 
-print("Part1:", sum(calculate_edge_price(region, grid) for region in regions))
-print("Part2:", sum(calculate_side_price(region) for region in regions))
+print("\033[1mPart1:\033[22m:", sum(calculate_edge_price(region, grid) for region in regions))
+print("\033[1mPart2:\033[22m:", sum(calculate_side_price(region) for region in regions))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

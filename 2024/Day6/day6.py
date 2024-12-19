@@ -60,11 +60,11 @@ def find_loops(grid):
 
 start_time = time()
 
-print("Part1:", len(pathing(grid)))
-print("Part2:", find_loops(grid))
+print("\033[1mPart1:\033[22m:", len(pathing(grid)))
+print("\033[1mPart2:\033[22m:", find_loops(grid))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
 
 """ # How to print the grid with complex numbers
 # Get the max row and column

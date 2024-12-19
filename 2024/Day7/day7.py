@@ -49,8 +49,8 @@ for line in data:
     if tester(target, numbers, True):
         totalp2 += target
 
-print("Part1:", totalp1)
+print("\033[1mPart1:\033[22m:", totalp1)
 print("Part2:", totalp2)
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

@@ -1,11 +1,8 @@
 # Solution for Advent of Code 2024, Day 19
 # https://adventofcode.com/2024/day/19
-
 import re
 from functools import cache
-from time import time
-
-from aocd import get_data
+from time import perf_counter
 
 
 @cache
@@ -15,7 +12,7 @@ def lets_towel(design):
     return sum(design.startswith(pattern) and lets_towel(design[len(pattern) :]) for pattern in patterns)
 
 
-start_time = time()
+start_time = perf_counter()
 
 data = open(0).read().strip()
 # Parsing stuff
@@ -23,8 +20,8 @@ patterns, designs = data.split("\n\n")[0].split(", "), data.split("\n\n")[1].spl
 
 makeable = [lets_towel(design) for design in designs]
 
-print("Part1:", len([towel for towel in makeable if towel]))
-print("Part2:", sum(makeable))
+print("\033[1mPart1:\033[22m", len([towel for towel in makeable if towel]))
+print("\033[1mPart2:\033[22m", sum(makeable))
 
-end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+end_time = perf_counter()
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

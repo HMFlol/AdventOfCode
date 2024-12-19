@@ -76,8 +76,8 @@ start_time = time()
 
 data = open(0).read().strip()
 
-print("Part1:", safety(data))
-print("Part2:", easteregg(data))
+print("\033[1mPart1:\033[22m:", safety(data))
+print("\033[1mPart2:\033[22m:", easteregg(data))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

@@ -56,8 +56,8 @@ def searchx_mas(grid):
 
 start_time = time()
 
-print("Part1:", searchxmas(grid))
-print("Part2:", searchx_mas(grid))
+print("\033[1mPart1:\033[22m:", searchxmas(grid))
+print("\033[1mPart2:\033[22m:", searchx_mas(grid))
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")

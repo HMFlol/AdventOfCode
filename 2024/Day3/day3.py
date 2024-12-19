@@ -33,8 +33,8 @@ def mul2():
 
 start_time = time()
 
-print("Part1:", mul1())
-print("Part2:", mul2())
+print("\033[1mPart1:\033[22m:", mul1())
+print("\033[1mPart2:\033[22m:", mul2())
 
 end_time = time()
-print(f"Time: {end_time - start_time:.6f} seconds")
+print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
