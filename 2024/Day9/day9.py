@@ -3,8 +3,6 @@
 
 from time import time
 
-from aocd import get_data
-
 
 # Part 1
 def checksum1(data):
@@ -89,15 +87,9 @@ def checksum2(data):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=9, year=2024)
+data = open(0).read().strip()
 
-
-data = list(load_data(use_test_data=1))
+data = list(data)
 
 print("Part1:", checksum1(data))
 print("Part2:", checksum2(data))

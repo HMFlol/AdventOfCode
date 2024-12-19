@@ -4,8 +4,6 @@
 import functools
 from time import time
 
-from aocd import get_data
-
 
 @functools.cache  # Use cache to store the results of the function
 def stonecalc(stone, blinks):
@@ -31,16 +29,9 @@ def stonecalc(stone, blinks):
 
 start_time = time()
 
+data = open(0).read().strip()
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=11, year=2024)
-
-
-data = [int(num) for num in load_data(use_test_data=0).split()]
+data = [int(num) for num in data.split()]
 
 p1 = sum(stonecalc(stone, 25) for stone in data)
 p2 = sum(stonecalc(stone, 75) for stone in data)

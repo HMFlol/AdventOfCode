@@ -3,9 +3,7 @@
 
 from time import time
 
-from aocd import get_data
-
-data = get_data(day=6, year=2024)
+data = open(0).read().strip()
 # data = open('test.txt').read()
 data = data.strip().splitlines()
 

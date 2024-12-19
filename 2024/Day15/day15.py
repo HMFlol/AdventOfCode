@@ -3,8 +3,6 @@
 
 from time import time
 
-from aocd import get_data
-
 
 def warehouse(grid, moves):
     grid = {col + row * 1j: val for row, line in enumerate(grid) for col, val in enumerate(line)}
@@ -83,15 +81,7 @@ def embiggen(grid, moves):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=15, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 
 # Parsing stuff
 grid, moves = data.strip().split("\n\n")

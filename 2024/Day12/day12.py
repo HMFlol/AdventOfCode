@@ -3,8 +3,6 @@
 
 from time import time
 
-from aocd import get_data
-
 # Problem things go here :)
 
 start_time = time()
@@ -73,15 +71,7 @@ def calculate_side_price(region):
     return area * corners
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=12, year=2024)
-
-
-data = load_data(use_test_data=1)
+data = open(0).read().strip()
 
 # Parsing stuff
 data = data.strip().splitlines()

@@ -3,8 +3,6 @@
 from collections import deque
 from time import time
 
-from aocd import get_data
-
 
 def incoming_game(corruption, size, bytes):
     seen = {*corruption[:bytes]}
@@ -62,22 +60,21 @@ def user_wins(corruption, size, bytes):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=18, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 # Parsing stuff
 lines = data.strip().split("\n")
 corruption = [*map(eval, lines)]
 
+if len(corruption) > 30:
+    size = 70
+    bytesize = 1024
+else:
+    size = 6
+    bytesize = 12
 
-print("Part1:", incoming_game(corruption, 70, 1024))
-print("Part2:", user_wins(corruption, 70, 1024))
+
+print("Part1:", incoming_game(corruption, size, bytesize))
+print("Part2:", user_wins(corruption, size, bytesize))
 
 end_time = time()
 print(f"Time: {end_time - start_time:.6f} seconds")

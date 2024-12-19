@@ -3,9 +3,7 @@
 
 from time import time
 
-from aocd import get_data
-
-data = get_data(day=5, year=2024)
+data = open(0).read().strip()
 # data = open('test.txt').read()
 rules, updates = [line.split() for line in data.split("\n\n")]
 rules, updates = ([rule.split("|") for rule in rules], [update.split(",") for update in updates])

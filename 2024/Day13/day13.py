@@ -4,8 +4,6 @@
 import re
 from time import time
 
-from aocd import get_data
-
 
 # Part 1 + 2
 def find_spend(section, add=0):
@@ -22,15 +20,7 @@ def find_spend(section, add=0):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=13, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 
 print("Part1:", sum(find_spend(section) for section in data.strip().split("\n\n")))
 print("Part2:", sum(find_spend(section, 10**13) for section in data.strip().split("\n\n")))

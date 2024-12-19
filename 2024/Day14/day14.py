@@ -4,7 +4,6 @@ import re
 from time import time
 
 import numpy as np
-from aocd import get_data
 
 WIDTH = 101
 HEIGHT = 103
@@ -75,15 +74,7 @@ def easteregg(data):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=14, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 
 print("Part1:", safety(data))
 print("Part2:", easteregg(data))

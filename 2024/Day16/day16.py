@@ -4,8 +4,6 @@ from collections import defaultdict
 from heapq import heappop, heappush
 from time import time
 
-from aocd import get_data
-
 
 def maze_score(grid):
     # Find starting position marked S
@@ -47,16 +45,7 @@ def maze_score(grid):
 
 start_time = time()
 
-
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=16, year=2024)
-
-
-data = load_data(use_test_data=1)
+data = open(0).read().strip()
 
 data = data.strip().splitlines()
 

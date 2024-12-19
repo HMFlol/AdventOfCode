@@ -3,8 +3,6 @@
 import re
 from time import time
 
-from aocd import get_data
-
 
 # Part 1
 def wtfprogram(rega, regb, regc, program):
@@ -73,15 +71,7 @@ def wtflowest(program, ans):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=17, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 # Parsing stuff
 rega, regb, regc, *program = map(int, re.findall(r"\d+", data))
 

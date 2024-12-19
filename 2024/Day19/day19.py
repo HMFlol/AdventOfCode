@@ -17,16 +17,7 @@ def lets_towel(design):
 
 start_time = time()
 
-
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=19, year=2024)
-
-
-data = load_data(use_test_data=0)
+data = open(0).read().strip()
 # Parsing stuff
 patterns, designs = data.split("\n\n")[0].split(", "), data.split("\n\n")[1].split("\n")
 

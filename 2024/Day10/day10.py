@@ -3,8 +3,6 @@
 
 from time import time
 
-from aocd import get_data
-
 
 # Part 1 + 2
 def trailhead_scores(grid, part1=True):
@@ -34,15 +32,7 @@ def trailhead_scores(grid, part1=True):
 start_time = time()
 
 
-def load_data(use_test_data=False):
-    if use_test_data:
-        with open("test.txt") as f:
-            return f.read()
-    else:
-        return get_data(day=10, year=2024)
-
-
-data = load_data(use_test_data=1)
+data = open(0).read().strip()
 
 # Parsing stuff
 data = data.strip().splitlines()

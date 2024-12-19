@@ -4,9 +4,7 @@
 from itertools import combinations
 from time import time
 
-from aocd import get_data
-
-data = get_data(day=8, year=2024)
+data = open(0).read().strip()
 # data = open("test.txt").read()
 data = data.strip().splitlines()
 
