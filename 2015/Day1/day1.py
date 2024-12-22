@@ -1,35 +1,24 @@
-from aocd import get_data
-from time import time
+from time import perf_counter
 
-data = get_data(day=1, year=2015)
-# data = open('test.txt').read()
-# data = [line.split() for line in data.splitlines()]
 
 def floor():
-    floor = 0
-    for c, char in enumerate(data):
-        if char == '(':
-            floor += 1
-        else:
-            floor -= 1
-        
-    return floor
+    return data.count("(") - data.count(")")
+
 
 def neg():
     floor = 0
-    for c, char in enumerate(data):
-        if char == '(':
-            floor += 1
-        else:
-            floor -= 1
+    for index, char in enumerate(data):
+        floor += 1 if char == "(" else -1
         if floor == -1:
-            return c + 1
+            return index
 
 
-start_time = time()
+if __name__ == "__main__":
+    start_time = perf_counter()
+    data = open(0).read().strip()
 
-print(f"Total (Part1):", floor())
-print(f"Total (Part2):", neg())
+    print("\033[1mPart1:\033[22m", floor())
+    print("\033[1mPart2:\033[22m", neg())
 
-end_time = time()
-print(f"Total execution time: {end_time - start_time:.6f} seconds")
+    end_time = perf_counter()
+    print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
