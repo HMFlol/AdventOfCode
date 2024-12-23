@@ -43,7 +43,6 @@ def find_best_sequence(price_lists):
     return max(sequences.values())
 
 
-# Problem things go here :)
 if __name__ == "__main__":
     start_time = perf_counter()
     data = [int(line) for line in open(0).read().strip().splitlines()]
