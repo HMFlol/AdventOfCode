@@ -27,37 +27,21 @@ for ($day = 1; $day -le 25; $day++) {
 # https://adventofcode.com/$year/day/$day
 from time import perf_counter
 
-# Problem things go here :)
+if __name__ == "__main__":
+    start_time = perf_counter()
+    data = open(0).read().strip()
 
-start_time = perf_counter()
+    print("\033[1mPart1:\033[22m", "p1")
+    print("\033[1mPart2:\033[22m", "p2")
 
-data = open(0).read().strip()
-
-# Parsing stuff
-
-print(
-    "\033[1mPart1:\033[22m",
-)
-print(
-    "\033[1mPart2:\033[22m",
-)
-
-end_time = perf_counter()
-print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
+    end_time = perf_counter()
+    print(f"\033[2mTime: {end_time - start_time:.4f}s\033[22m")
 
 "@
         $pyfileContent | Set-Content -Path $pyFile
         Write-Host "Created file $pyFile... ✓" -ForegroundColor Green
     } else {
         Write-Host "File $pyFile already exists, skipping... ✗" -ForegroundColor Red
-    }
-
-    $inputFile = "$dayDir\input.txt"
-    if (-Not (Test-Path -Path $inputFile)) {
-        New-Item -ItemType File -Path $inputFile | Out-Null
-        Write-Host "Created file $inputFile... ✓" -ForegroundColor Green
-    } else {
-        Write-Host "File $inputFile already exists, skipping... ✗" -ForegroundColor Red
     }
 
     $testFile = "$dayDir\test.txt"
