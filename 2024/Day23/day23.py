@@ -21,26 +21,29 @@ def find_triangles(conn_list):
 
 def find_password(conn_list):
     """Find the maximum clique in the graph using networkx and join it, sorted, on , ."""
-    networks = [{c} for c in conn_list]
-    for n in networks:
-        for c in conn_list:
-            if all(d in conn_list[c] for d in n):
-                n.add(c)
+    networks = [{pc} for pc in conn_list]
+    for network in networks:
+        for pc in conn_list:
+            if all(connection in conn_list[pc] for connection in network):
+                network.add(pc)
 
     return ",".join(sorted(max(networks, key=len)))
 
 
 def find_triangles_nx(graph):
     """Find the number of triangles in the graph using networkx."""
-    triangles_nx = [com for com in nx.enumerate_all_cliques(graph) if len(com) == 3]
+    cliques = []
 
-    return len([triangle for triangle in triangles_nx if any(com.startswith("t") for com in triangle)])
+    for clique in nx.enumerate_all_cliques(graph):
+        if len(clique) == 3 and any(n.startswith("t") for n in clique):
+            cliques.append(clique)
+
+    return len(cliques)
 
 
 def find_password_nx(graph):
     """Find the maximum clique in the graph using networkx and join it, sorted, on , ."""
-    max_clique_nx = nx.find_cliques(graph)
-    max_clique = max(max_clique_nx, key=len)
+    max_clique = max(nx.find_cliques(graph), key=len)
 
     return ",".join(sorted(max_clique))
 
@@ -52,10 +55,10 @@ if __name__ == "__main__":
     conn_list = {}
     graph = nx.Graph()
     for connection in data.splitlines():
-        com1, com2 = connection.split("-")
-        conn_list.setdefault(com1, []).append(com2)
-        conn_list.setdefault(com2, []).append(com1)
-        graph.add_edge(com1, com2)
+        pc1, pc2 = connection.split("-")
+        conn_list.setdefault(pc1, []).append(pc2)
+        conn_list.setdefault(pc2, []).append(pc1)
+        graph.add_edge(pc1, pc2)
 
     p1, p2 = find_triangles(conn_list), find_password(conn_list)
     # p1, p2 = find_triangles_nx(graph), find_password_nx(graph)
