@@ -22,7 +22,6 @@ def process_secrets(secret, cycles):
     return secret, prices
 
 
-# Part 2
 def find_best_sequence(price_lists):
     """Finds the sequence of 4 price changes with the highest total price."""
     sequences = defaultdict(int)
