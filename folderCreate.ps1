@@ -1,9 +1,7 @@
-﻿$year = 2024
+﻿$year = 2025
 
-# Path to the .gitignore file in the parent directory of the $year folder
-$yearFullPath = (Get-Item -Path $year).FullName
-$parentDir = Split-Path -Path $yearFullPath -Parent
-$gitignorePath = Join-Path -Path $parentDir -ChildPath ".gitignore"
+# Path to the .gitignore file in the current directory
+$gitignorePath = Join-Path -Path $PSScriptRoot -ChildPath ".gitignore"
 
 # Read existing entries from .gitignore
 $gitignoreEntries = Get-Content -Path $gitignorePath -ErrorAction SilentlyContinue
@@ -11,7 +9,7 @@ $gitignoreEntries = Get-Content -Path $gitignorePath -ErrorAction SilentlyContin
 Write-Host "Creating directories and files for Advent of Code $year"
 Write-Host "================="
 
-for ($day = 1; $day -le 25; $day++) {
+for ($day = 1; $day -le 12; $day++) {
     $dayDir = "$year\Day$day"
     if (-Not (Test-Path -Path $dayDir)) {
         New-Item -ItemType Directory -Path "$dayDir" | Out-Null
