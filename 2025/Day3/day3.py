@@ -22,13 +22,12 @@ def many_digits(bank, size):
                 # If it's a 9 we found the best digit and break early
                 if max_digit == "9":
                     break
-
         # Add the best digit we found to the bigboy list and move the index up
         bigboy.append(max_digit)
         index = best_index + 1
-
     # Join the list into a string and convert to int and return it!
-    return int("".join(bigboy))
+    result = int("".join(bigboy))
+    return result
 
 
 if __name__ == "__main__":
