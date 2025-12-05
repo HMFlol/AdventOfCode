@@ -14,9 +14,25 @@ def sofresh(ing_id_ranges, ing_ids):
 
 
 def unique_ids(ing_id_ranges):
-    unique_ids = {num for lower, upper in ing_id_ranges for num in range(lower, upper + 1)}
+    # sort ranges based on first number
+    ing_id_ranges.sort(key=lambda x: x[0])
 
-    return len(unique_ids)
+    merged_ranges = []
+
+    for cur_lower, cur_upper in ing_id_ranges:
+        # if nothing is in merged_ranges or the current lower is greater than the last upper, append it
+        if not merged_ranges or cur_lower > merged_ranges[-1][1]:
+            merged_ranges.append([cur_lower, cur_upper])
+        else:
+            # otherwise, extend the last range
+            merged_ranges[-1][1] = max(merged_ranges[-1][1], cur_upper)
+
+    count = 0
+    # do math to simply count the unique ids in the ranges
+    for lower, upper in merged_ranges:
+        count += upper - lower + 1
+
+    return count
 
 
 if __name__ == "__main__":
