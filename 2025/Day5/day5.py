@@ -13,7 +13,7 @@ def sofresh(ing_id_ranges, ing_ids):
     return count
 
 
-def unique_ids(ing_id_ranges):
+def sofresh_ranges(ing_id_ranges):
     # sort ranges based on first number
     ing_id_ranges.sort(key=lambda x: x[0])
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     ing_id_ranges = [tuple(map(int, num.split("-"))) for num in ing_id_ranges]
 
     p1 = sofresh(ing_id_ranges, ing_ids)
-    p2 = unique_ids(ing_id_ranges)
+    p2 = sofresh_ranges(ing_id_ranges)
 
     print("\033[1mPart1:\033[22m", p1)
     print("\033[1mPart2:\033[22m", p2)
