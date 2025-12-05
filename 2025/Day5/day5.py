@@ -15,6 +15,7 @@ def sofresh(ing_id_ranges, ing_ids):
 
 def unique_ids(ing_id_ranges):
     unique_ids = {num for lower, upper in ing_id_ranges for num in range(lower, upper + 1)}
+
     return len(unique_ids)
 
 
