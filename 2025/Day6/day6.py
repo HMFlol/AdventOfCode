@@ -33,29 +33,29 @@ def part1(data):
 
 
 def part2(data):
-    # flip the data 90 degrees ccw so we can group by columns
+    # Flip the data 90 degrees CCW so we can group by columns
     flipped = list(zip(*data.splitlines()))
-    # Split columns into groups separated by all-space columns
-    groups = []
-    group = []
+    # Parse equations directly from flipped columns
+    # Each equation is separated by all-space columns
+    equations = []
+    current_equation = []
 
     for col in flipped:
-        # if the column is all spaces, append the group and reset it
-        if set(col) == {" "}:
-            if group:  # Only append non-empty groups
-                groups.append(group)
-                group = []
+        if set(col) == {" "}:  # All-space column = separator
+            if current_equation:
+                # Parse the accumulated columns into numbers and operator
+                # Each column has format: digits + operator, e.g., ('3', '6', '9', '+')
+                numbers = [int("".join(c[:-1]).strip()) for c in current_equation]
+                operator = current_equation[0][-1]  # Last char of first column
+                equations.append((numbers, operator))
+                current_equation = []
         else:
-            group.append(col)
-    # Don't forget the last group
-    groups.append(group)
+            current_equation.append(col)
 
-    # Parse each group into an equation
-    equations = []
-    # for each group, remove the last character (operator) and join the rest into a number
-    for group in groups:
-        numbers = [int("".join(line[:-1]).strip()) for line in group]
-        operator = group[0][-1]
+    # Process the last equation (no trailing separator)
+    if current_equation:
+        numbers = [int("".join(c[:-1]).strip()) for c in current_equation]
+        operator = current_equation[0][-1]
         equations.append((numbers, operator))
 
     return calculate_equations(equations)
