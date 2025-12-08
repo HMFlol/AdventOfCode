@@ -22,12 +22,9 @@ def part1(data):
     lines = [line.split() for line in data.strip().splitlines()]
     # split the lines into number rows and operators
     number_rows, operators = lines[:-1], lines[-1]
-    # zip the number rows and operators together
-    equations = []
-    for number_list, operator in zip(zip(*number_rows), operators):
-        numbers = [int(n) for n in number_list]
-        operator = operator
-        equations.append((numbers, operator))
+    columns = zip(*number_rows)
+    # zip the columns and operators together
+    equations = [([int(n) for n in col], op) for col, op in zip(columns, operators)]
 
     return calculate_equations(equations)
 
