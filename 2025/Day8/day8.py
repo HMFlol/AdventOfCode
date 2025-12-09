@@ -37,8 +37,10 @@ def union(parent, x, y):
 def get_group_sizes(parent):
     # Get sizes of all connected components.
     sizes = defaultdict(int)
+    # Count members in each group.
     for x in parent:
         sizes[find(parent, x)] += 1
+    # Return sizes of all groups.
     return list(sizes.values())
 
 
