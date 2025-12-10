@@ -48,13 +48,14 @@ def part1(points, distances):
     # Calculate product of three largest groups after 1000 connections.
     parent = {i: i for i in range(len(points))}
     # Connect first 1000 closest pairs.
-    for t in range(1000):
+    for t in range(10):
         _, i, j = distances[t]
         # Union the two points if they are not already connected.
         if find(parent, i) != find(parent, j):
             union(parent, i, j)
     # Get sizes of all groups and find the three largest.
     sorted_sizes = sorted(get_group_sizes(parent))
+    print(sorted_sizes)
 
     return sorted_sizes[-1] * sorted_sizes[-2] * sorted_sizes[-3]
 
